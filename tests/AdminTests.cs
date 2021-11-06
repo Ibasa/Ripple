@@ -9,40 +9,6 @@ using System.Collections.Generic;
 
 namespace Ibasa.Ripple.Tests
 {
-    public static class CI
-    {
-        public static bool IsRunningInCI
-        {
-            get
-            {
-                return Environment.GetEnvironmentVariable("CI") == "true";
-            }
-        }
-    }
-
-
-    public class IgnoreOnCIFactAttribute : FactAttribute
-    {
-        public IgnoreOnCIFactAttribute()
-        {
-            if (CI.IsRunningInCI)
-            {
-                Skip = "Ignored on CI";
-            }
-        }
-    }
-
-    public class IgnoreOnCITheoryAttribute : TheoryAttribute
-    {
-        public IgnoreOnCITheoryAttribute()
-        {
-            if (CI.IsRunningInCI)
-            {
-                Skip = "Ignored on CI";
-            }
-        }
-    }
-
     public abstract class AdminTestsSetup : IDisposable
     {
         private static string config = @"
@@ -141,12 +107,6 @@ ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
 
         public AdminTestsSetup()
         {
-            if(CI.IsRunningInCI)
-            {
-                // Docker.DotNet isn't working in CI so skip setup
-                return;
-            }
-
             var configDirectory =
                 System.IO.Directory.CreateDirectory(
                     System.IO.Path.Combine(
@@ -167,7 +127,7 @@ ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
             // Pull the latest image 
             var imagesCreateParameters = new ImagesCreateParameters
             {
-                FromImage = "xrptipbot/rippled",
+                FromImage = "xrpllabsofficial/xrpld",
                 Tag = "latest"
             };
             var progress = new Progress<JSONMessage>();
@@ -259,11 +219,6 @@ ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
 
         public virtual void Dispose()
         {
-            if (CI.IsRunningInCI)
-            {
-                return;
-            }
-
             var removeParameters = new ContainerRemoveParameters();
             removeParameters.Force = true;
             Client.Containers.RemoveContainerAsync(ID, removeParameters).Wait();
@@ -343,14 +298,14 @@ ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
             this.Setup = setup;
         }
 
-        [IgnoreOnCIFact]
+        [Fact]
         public async void TestPing()
         {
             // Bit of a sanity check that all the docker setup is ok
             await Api.Ping();
         }
 
-        [IgnoreOnCITheory]
+        [Theory]
         [InlineData(null)]
         [InlineData(KeyType.Secp256k1)]
         [InlineData(KeyType.Ed25519)]
@@ -387,7 +342,7 @@ ED264807102805220DA0F312E71FC2C69E1552C9C5790F6C25E3729DEB573D5860
             Assert.Equal(masterKey, response.MasterKey);
         }
 
-        [IgnoreOnCITheory]
+        [Theory]
         [InlineData(null)]
         [InlineData("BAWL MAN JADE MOON DOVE GEM SON NOW HAD ADEN GLOW TIRE")]
         public async void TestValidationCreate(string secret)
