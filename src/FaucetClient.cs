@@ -30,7 +30,7 @@ namespace Ibasa.Ripple
         public async Task RequestFunding(AccountId accountId)
         {
             var content = new StringContent(
-                string.Format("{\"destination\": \"{0}\"}", accountId),
+                string.Format("{{\"destination\": \"{0}\"}}", accountId),
                 System.Text.Encoding.UTF8,
                 "application/json");
             var response = await httpClient.PostAsync("/accounts", content);

@@ -5,7 +5,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>Ibasa.Ripple is a library for interacting with the Ripple network and data.</Description>
     <PackageId>Ibasa.Ripple</PackageId>
-    <Version>0.0.15</Version>
+    <Version>0.0.16</Version>
     <Authors>Ibasa</Authors>
     <Company>Ibasa</Company>
     <RepositoryUrl>https://github.com/Ibasa/Ripple</RepositoryUrl>

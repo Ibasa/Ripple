@@ -29,7 +29,7 @@ namespace Ibasa.Ripple.Tests
         public async Task TestGetPath_Event()
         {
             var accounts = await Task.WhenAll(TestAccount.Create(), TestAccount.Create(), TestAccount.Create(), TestAccount.Create());
-            await Setup.WaitForAccounts(accounts);
+            await Utils.WaitForAccounts(Api, accounts);
             var gbp = new CurrencyCode("GBP");
 
             var A1 = accounts[0];

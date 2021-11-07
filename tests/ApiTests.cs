@@ -50,57 +50,8 @@ namespace Ibasa.Ripple.Tests
             Api = CreateApi();
 
             // Wait for the two accounts from setup to exists
-            WaitForAccount(TestAccountOne.Address).Wait();
-            WaitForAccount(TestAccountOne.Address).Wait();
-        }
-
-        /// <summary>
-        /// Wait for the account to exist in a validated ledger, then return current information.
-        /// </summary>
-        public async Task<AccountInfoResponse> WaitForAccount(AccountId account)
-        {
-            var terminationTimeout = DateTime.UtcNow + TimeSpan.FromMinutes(1.0);
-
-            var infoRequest = new AccountInfoRequest()
-            {
-                Ledger = LedgerSpecification.Validated,
-                Account = account,
-            };
-            AccountInfoResponse infoResponse = null;
-            while (infoResponse == null)
-            {
-                try
-                {
-                    infoResponse = await Api.AccountInfo(infoRequest);
-                }
-                catch (RippleRequestException exc)
-                {
-                    if (DateTime.UtcNow > terminationTimeout)
-                    {
-                        throw new Exception(string.Format("Could not find account {0} within 5 minutes", account));
-                    }
-
-                    if (exc.Error != "actNotFound") { throw; }
-                }
-
-                if (infoResponse == null)
-                {
-                    System.Threading.Thread.Sleep(1000);
-                }
-            }
-
-            infoRequest.Ledger = LedgerSpecification.Current;
-            return await Api.AccountInfo(infoRequest);
-        }
-
-        public async Task<AccountInfoResponse[]> WaitForAccounts(params TestAccount[] accounts)
-        {
-            var results = new AccountInfoResponse[accounts.Length];
-            for (var i = 0; i < accounts.Length; ++i)
-            {
-                results[i] = await WaitForAccount(accounts[i].Address);
-            }
-            return results;
+            Utils.WaitForAccount(Api, TestAccountOne.Address).Wait();
+            Utils.WaitForAccount(Api, TestAccountOne.Address).Wait();
         }
 
         public void Dispose()
@@ -151,7 +102,7 @@ namespace Ibasa.Ripple.Tests
                 }
 
                 var account = toSubmit[0].Account;
-                AccountInfoResponse infoResponse = await Setup.WaitForAccount(account);
+                AccountInfoResponse infoResponse = await Utils.WaitForAccount(Api, account);
                 var feeResponse = await Api.Fee();
 
                 var lastLedgerSequence = feeResponse.LedgerCurrentIndex + 8;
@@ -602,7 +553,7 @@ namespace Ibasa.Ripple.Tests
         {
             // We need a fresh account setup for this test
             var testAccount = await TestAccount.Create();
-            await Setup.WaitForAccount(testAccount.Address);
+            await Utils.WaitForAccount(Api, testAccount.Address);
 
             // All tests will be against this new account,
             // also all but the last will have Transactions set true.
@@ -701,7 +652,7 @@ namespace Ibasa.Ripple.Tests
         {
             // We need a fresh accounts setup for this test
             var accounts = await Task.WhenAll(TestAccount.Create(), TestAccount.Create(), TestAccount.Create(), TestAccount.Create());
-            await Setup.WaitForAccounts(accounts);
+            await Utils.WaitForAccounts(Api, accounts);
             var gatewayAccount = accounts[0];
             var account1 = accounts[1];
             var account2 = accounts[2];
@@ -793,7 +744,7 @@ namespace Ibasa.Ripple.Tests
         {
             // Make a fresh account to delete and send funds to account 1
             var deleteAccount = await TestAccount.Create();
-            await Setup.WaitForAccount(deleteAccount.Address);
+            await Utils.WaitForAccount(Api, deleteAccount.Address);
 
             var accountOne = Setup.TestAccountOne;
 
@@ -849,7 +800,7 @@ namespace Ibasa.Ripple.Tests
         {
             // Make a fresh account to set signer list on
             var testAccount = await TestAccount.Create();
-            await Setup.WaitForAccount(testAccount.Address);
+            await Utils.WaitForAccount(Api, testAccount.Address);
 
             // Make up three "accounts"
             var random = new Random();
@@ -999,9 +950,7 @@ namespace Ibasa.Ripple.Tests
             var account1 = await TestAccount.Create();
             var account2 = await TestAccount.Create();
             var account3 = await TestAccount.Create();
-            await Setup.WaitForAccount(account1.Address);
-            await Setup.WaitForAccount(account2.Address);
-            await Setup.WaitForAccount(account3.Address);
+            await Utils.WaitForAccounts(Api, account1.Address, account2.Address, account3.Address);
 
 
             var currencies = new CurrencyCode[20];
