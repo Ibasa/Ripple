@@ -9,7 +9,9 @@ namespace Ibasa.Ripple
     {
         public override AccountId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            return new AccountId(reader.GetString());
+            var str = reader.GetString();
+            if (str == null) return default;
+            return new AccountId(str);
         }
 
         public override void Write(Utf8JsonWriter writer, AccountId value, JsonSerializerOptions options)
