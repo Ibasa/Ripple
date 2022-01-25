@@ -84,14 +84,7 @@ namespace Ibasa.Ripple
                         {
                             var id = json.RootElement.GetProperty("id").GetUInt32();
                             var pathFindResponse = new PathFindResponse(json.RootElement);
-                            try
-                            {
-                                OnPathFind?.Invoke(this, id, pathFindResponse);
-                            }
-                            catch (Exception exc)
-                            {
-                                // TODO: We don't want user exceptions from the OnPathFind event to tear down this thread but we should bubble them up somehow.
-                            }
+                            OnPathFind?.Invoke(this, id, pathFindResponse);
                         }
 
                         response.Clear();
