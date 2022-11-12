@@ -17,7 +17,7 @@ let rec findPath searchPath =
         
 /// Download st definitions to json
 let downloadDefinitions () =
-    let request = System.Net.WebRequest.Create("https://raw.githubusercontent.com/ripple/ripple-binary-codec/master/src/enums/definitions.json")
+    let request = System.Net.WebRequest.Create("https://raw.githubusercontent.com/XRPLF/xrpl.js/develop/packages/ripple-binary-codec/src/enums/definitions.json")
     use response = request.GetResponse()
     use stream = response.GetResponseStream()
     JsonDocument.Parse(stream)
