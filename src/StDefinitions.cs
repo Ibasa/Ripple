@@ -801,6 +801,26 @@ namespace Ibasa.Ripple
         /// </summary>
         public uint? TransferRate { get; private set; }
 
+        /// <summary>
+        /// (Optional) How many total of this account's issued non-fungible tokens have been burned. This number is always equal or less than MintedNFTokens.
+        /// </summary>
+        public uint? BurnedNFTokens { get; private set; }
+
+        /// <summary>
+        /// (Optional) How many total non-fungible tokens have been minted by and on behalf of this account.
+        /// </summary>
+        public uint? MintedNFTokens { get; private set; }
+
+        /// <summary>
+        /// (Optional) Another account that is authorized to mint non-fungible tokens on behalf of this account.
+        /// </summary>
+        public AccountId? NFTokenMinter { get; private set; }
+
+        /// <summary>
+        /// (Optional) How many significant digits to use for exchange rates of Offers involving currencies issued by this address. Valid values are 3 to 15, inclusive. (Added by the TickSize amendment.)
+        /// </summary>
+        public uint? TicketCount { get; private set; }
+
         internal AccountRootLedgerEntry(JsonElement json)
         {
             if (json.GetProperty("LedgerEntryType").GetString() != "AccountRoot")
@@ -843,6 +863,22 @@ namespace Ibasa.Ripple
             if (json.TryGetProperty("TransferRate", out element))
             {
                 TransferRate = element.GetUInt32();
+            }
+            if (json.TryGetProperty("BurnedNFTokens", out element))
+            {
+                BurnedNFTokens = element.GetUInt32();
+            }
+            if (json.TryGetProperty("MintedNFTokens", out element))
+            {
+                MintedNFTokens = element.GetUInt32();
+            }
+            if (json.TryGetProperty("NFTokenMinter", out element))
+            {
+                NFTokenMinter = new AccountId(element.GetString());
+            }
+            if (json.TryGetProperty("TicketCount", out element))
+            {
+                TicketCount = element.GetUInt32();
             }
         }
 
@@ -892,6 +928,30 @@ namespace Ibasa.Ripple
             if (!reader.TryReadFieldId(out fieldId))
             {
                 throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.UInt32_TicketCount)
+            {
+                TicketCount = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId == StFieldId.UInt32_MintedNFTokens)
+            {
+                MintedNFTokens = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId == StFieldId.UInt32_BurnedNFTokens)
+            {
+                BurnedNFTokens = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
             }
             if (fieldId == StFieldId.Hash128_EmailHash)
             {
@@ -955,6 +1015,14 @@ namespace Ibasa.Ripple
             if (fieldId == StFieldId.AccountID_RegularKey)
             {
                 RegularKey = reader.ReadAccount();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    return;
+                }
+            }
+            if (fieldId == StFieldId.AccountID_NFTokenMinter)
+            {
+                NFTokenMinter = reader.ReadAccount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
                     return;

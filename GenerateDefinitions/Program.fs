@@ -446,6 +446,10 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "RegularKey" "The address of a key pair that can be used to sign transactions for this account instead of the master key. Use a SetRegularKey transaction to change this value."
                 fieldOpt "TickSize" "How many significant digits to use for exchange rates of Offers involving currencies issued by this address. Valid values are 3 to 15, inclusive. (Added by the TickSize amendment.)"
                 fieldOpt "TransferRate" "A transfer fee to charge other users for sending currency issued by this account to each other."
+                fieldOpt "BurnedNFTokens" "How many total of this account's issued non-fungible tokens have been burned. This number is always equal or less than MintedNFTokens."
+                fieldOpt "MintedNFTokens" "How many total non-fungible tokens have been minted by and on behalf of this account."
+                fieldOpt "NFTokenMinter" "Another account that is authorized to mint non-fungible tokens on behalf of this account."
+                fieldOpt "TicketCount" "How many significant digits to use for exchange rates of Offers involving currencies issued by this address. Valid values are 3 to 15, inclusive. (Added by the TickSize amendment.)"
             ]
         }
         {
