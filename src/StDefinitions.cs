@@ -35,6 +35,12 @@ namespace Ibasa.Ripple.St
         DepositPreauth = 19,
         TrustSet = 20,
         AccountDelete = 21,
+        SetHook = 22,
+        NFTokenMint = 25,
+        NFTokenBurn = 26,
+        NFTokenCreateOffer = 27,
+        NFTokenCancelOffer = 28,
+        NFTokenAcceptOffer = 29,
         EnableAmendment = 100,
         SetFee = 101,
         UNLModify = 102,
@@ -46,8 +52,6 @@ namespace Ibasa.Ripple.St
     /// </summary>
     public enum StLedgerEntryType
     {
-        Any = -3,
-        Child = -2,
         Invalid = -1,
         AccountRoot = 97,
         DirectoryNode = 100,
@@ -60,12 +64,16 @@ namespace Ibasa.Ripple.St
         FeeSettings = 115,
         Escrow = 117,
         PayChannel = 120,
-        DepositPreauth = 112,
         Check = 67,
+        DepositPreauth = 112,
+        NegativeUNL = 78,
+        NFTokenPage = 80,
+        NFTokenOffer = 55,
+        Any = -3,
+        Child = -2,
         Nickname = 110,
         Contract = 99,
         GeneratorMap = 103,
-        NegativeUNL = 78,
     }
 
     /// <summary>
@@ -76,26 +84,31 @@ namespace Ibasa.Ripple.St
     /// </summary>
     public enum StTypeCode
     {
-        Validation = 10003,
         Done = -1,
+        Unknown = -2,
+        NotPresent = 0,
+        UInt16 = 1,
+        UInt32 = 2,
+        UInt64 = 3,
         Hash128 = 4,
+        Hash256 = 5,
+        Amount = 6,
         Blob = 7,
         AccountID = 8,
-        Amount = 6,
-        Hash256 = 5,
-        UInt8 = 16,
-        Vector256 = 19,
         Object = 14,
-        Unknown = -2,
-        Transaction = 10001,
+        Array = 15,
+        UInt8 = 16,
         Hash160 = 17,
         PathSet = 18,
+        Vector256 = 19,
+        UInt96 = 20,
+        UInt192 = 21,
+        UInt384 = 22,
+        UInt512 = 23,
+        Transaction = 10001,
         LedgerEntry = 10002,
-        UInt16 = 1,
-        NotPresent = 0,
-        UInt64 = 3,
-        UInt32 = 2,
-        Array = 15,
+        Validation = 10003,
+        Metadata = 10004,
     }
 
     public enum StAccountIDFieldCode
@@ -103,10 +116,12 @@ namespace Ibasa.Ripple.St
         Account = 1,
         Authorize = 5,
         Destination = 3,
+        EmitCallback = 10,
+        HookAccount = 16,
         Issuer = 4,
+        NFTokenMinter = 9,
         Owner = 2,
         RegularKey = 8,
-        Target = 7,
         Unauthorize = 6,
     }
 
@@ -121,6 +136,7 @@ namespace Ibasa.Ripple.St
         LimitAmount = 3,
         LowLimit = 6,
         MinimumOffer = 16,
+        NFTokenBrokerFee = 19,
         RippleEscrow = 17,
         SendMax = 9,
         TakerGets = 5,
@@ -134,8 +150,13 @@ namespace Ibasa.Ripple.St
         AffectedNodes = 8,
         ArrayEndMarker = 1,
         DisabledValidators = 17,
+        HookExecutions = 18,
+        HookGrants = 20,
+        HookParameters = 19,
+        Hooks = 11,
         Majorities = 16,
         Memos = 9,
+        NFTokens = 10,
         Necessary = 6,
         SignerEntries = 4,
         Signers = 3,
@@ -151,7 +172,10 @@ namespace Ibasa.Ripple.St
         ExpireCode = 10,
         Fulfillment = 16,
         FundCode = 8,
-        Generator = 5,
+        HookParameterName = 24,
+        HookParameterValue = 25,
+        HookReturnString = 23,
+        HookStateData = 22,
         MasterSignature = 18,
         MemoData = 13,
         MemoFormat = 14,
@@ -163,6 +187,7 @@ namespace Ibasa.Ripple.St
         SigningPubKey = 3,
         TxnSignature = 4,
         UNLModifyValidator = 19,
+        URI = 5,
         ValidatorToDisable = 20,
         ValidatorToReEnable = 21,
     }
@@ -190,15 +215,27 @@ namespace Ibasa.Ripple.St
         CheckID = 24,
         ConsensusHash = 23,
         Digest = 21,
+        EmitHookHash = 13,
+        EmitNonce = 12,
+        EmitParentTxnID = 11,
+        HookHash = 31,
+        HookNamespace = 32,
+        HookSetTxnID = 33,
+        HookStateKey = 30,
         InvoiceID = 17,
         LedgerHash = 1,
         LedgerIndex = 6,
+        NFTokenBuyOffer = 28,
+        NFTokenID = 10,
+        NFTokenSellOffer = 29,
+        NextPageMin = 27,
         Nickname = 18,
         ParentHash = 2,
+        PreviousPageMin = 26,
         PreviousTxnID = 5,
         RootIndex = 8,
-        TicketID = 20,
         TransactionHash = 3,
+        ValidatedHash = 25,
         WalletLocator = 7,
         hash = 257,
         index = 258,
@@ -209,15 +246,28 @@ namespace Ibasa.Ripple.St
         LedgerEntry = 1,
     }
 
+    public enum StMetadataFieldCode
+    {
+        Metadata = 1,
+    }
+
     public enum StObjectFieldCode
     {
         CreatedNode = 3,
         DeletedNode = 4,
         DisabledValidator = 19,
+        EmitDetails = 13,
+        EmittedTxn = 20,
         FinalFields = 7,
+        Hook = 14,
+        HookDefinition = 22,
+        HookExecution = 21,
+        HookGrant = 24,
+        HookParameter = 23,
         Majority = 18,
         Memo = 10,
         ModifiedNode = 5,
+        NFToken = 12,
         NewFields = 8,
         ObjectEndMarker = 1,
         PreviousFields = 6,
@@ -239,30 +289,40 @@ namespace Ibasa.Ripple.St
 
     public enum StUInt16FieldCode
     {
+        HookApiVersion = 20,
+        HookEmitCount = 18,
+        HookExecutionIndex = 19,
+        HookStateChangeCount = 17,
         LedgerEntryType = 1,
         SignerWeight = 3,
         TransactionType = 2,
+        TransferFee = 4,
         Version = 16,
     }
 
     public enum StUInt32FieldCode
     {
         BondAmount = 23,
+        BurnedNFTokens = 44,
         CancelAfter = 36,
         ClearFlag = 34,
         CloseTime = 7,
         DestinationTag = 14,
+        EmitGeneration = 46,
         Expiration = 10,
         FinishAfter = 37,
         FirstLedgerSequence = 26,
         Flags = 2,
         HighQualityIn = 16,
         HighQualityOut = 17,
+        HookStateCount = 45,
         LastLedgerSequence = 27,
         LedgerSequence = 6,
         LoadFee = 24,
         LowQualityIn = 18,
         LowQualityOut = 19,
+        MintedNFTokens = 43,
+        NFTokenTaxon = 42,
         OfferSequence = 25,
         OperationLimit = 29,
         OwnerCount = 13,
@@ -292,18 +352,27 @@ namespace Ibasa.Ripple.St
     {
         BaseFee = 5,
         BookNode = 3,
+        Cookie = 10,
         DestinationNode = 9,
+        EmitBurden = 13,
         ExchangeRate = 6,
         HighNode = 8,
+        HookInstructionCount = 17,
+        HookOn = 16,
+        HookReturnCode = 18,
         IndexNext = 1,
         IndexPrevious = 2,
         LowNode = 7,
+        NFTokenOfferNode = 12,
         OwnerNode = 4,
+        ReferenceCount = 19,
+        ServerVersion = 11,
     }
 
     public enum StUInt8FieldCode
     {
         CloseResolution = 1,
+        HookResult = 18,
         Method = 2,
         TickSize = 16,
         TransactionResult = 3,
@@ -326,6 +395,7 @@ namespace Ibasa.Ripple.St
         Amendments = 3,
         Hashes = 2,
         Indexes = 1,
+        NFTokenOffers = 4,
     }
 
     public partial struct StFieldId
@@ -333,10 +403,12 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId AccountID_Account = new StFieldId(StTypeCode.AccountID, 1);
         public static readonly StFieldId AccountID_Authorize = new StFieldId(StTypeCode.AccountID, 5);
         public static readonly StFieldId AccountID_Destination = new StFieldId(StTypeCode.AccountID, 3);
+        public static readonly StFieldId AccountID_EmitCallback = new StFieldId(StTypeCode.AccountID, 10);
+        public static readonly StFieldId AccountID_HookAccount = new StFieldId(StTypeCode.AccountID, 16);
         public static readonly StFieldId AccountID_Issuer = new StFieldId(StTypeCode.AccountID, 4);
+        public static readonly StFieldId AccountID_NFTokenMinter = new StFieldId(StTypeCode.AccountID, 9);
         public static readonly StFieldId AccountID_Owner = new StFieldId(StTypeCode.AccountID, 2);
         public static readonly StFieldId AccountID_RegularKey = new StFieldId(StTypeCode.AccountID, 8);
-        public static readonly StFieldId AccountID_Target = new StFieldId(StTypeCode.AccountID, 7);
         public static readonly StFieldId AccountID_Unauthorize = new StFieldId(StTypeCode.AccountID, 6);
 
         public static readonly StFieldId Amount_Amount = new StFieldId(StTypeCode.Amount, 1);
@@ -348,6 +420,7 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Amount_LimitAmount = new StFieldId(StTypeCode.Amount, 3);
         public static readonly StFieldId Amount_LowLimit = new StFieldId(StTypeCode.Amount, 6);
         public static readonly StFieldId Amount_MinimumOffer = new StFieldId(StTypeCode.Amount, 16);
+        public static readonly StFieldId Amount_NFTokenBrokerFee = new StFieldId(StTypeCode.Amount, 19);
         public static readonly StFieldId Amount_RippleEscrow = new StFieldId(StTypeCode.Amount, 17);
         public static readonly StFieldId Amount_SendMax = new StFieldId(StTypeCode.Amount, 9);
         public static readonly StFieldId Amount_TakerGets = new StFieldId(StTypeCode.Amount, 5);
@@ -358,8 +431,13 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Array_AffectedNodes = new StFieldId(StTypeCode.Array, 8);
         public static readonly StFieldId Array_ArrayEndMarker = new StFieldId(StTypeCode.Array, 1);
         public static readonly StFieldId Array_DisabledValidators = new StFieldId(StTypeCode.Array, 17);
+        public static readonly StFieldId Array_HookExecutions = new StFieldId(StTypeCode.Array, 18);
+        public static readonly StFieldId Array_HookGrants = new StFieldId(StTypeCode.Array, 20);
+        public static readonly StFieldId Array_HookParameters = new StFieldId(StTypeCode.Array, 19);
+        public static readonly StFieldId Array_Hooks = new StFieldId(StTypeCode.Array, 11);
         public static readonly StFieldId Array_Majorities = new StFieldId(StTypeCode.Array, 16);
         public static readonly StFieldId Array_Memos = new StFieldId(StTypeCode.Array, 9);
+        public static readonly StFieldId Array_NFTokens = new StFieldId(StTypeCode.Array, 10);
         public static readonly StFieldId Array_Necessary = new StFieldId(StTypeCode.Array, 6);
         public static readonly StFieldId Array_SignerEntries = new StFieldId(StTypeCode.Array, 4);
         public static readonly StFieldId Array_Signers = new StFieldId(StTypeCode.Array, 3);
@@ -372,7 +450,10 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Blob_ExpireCode = new StFieldId(StTypeCode.Blob, 10);
         public static readonly StFieldId Blob_Fulfillment = new StFieldId(StTypeCode.Blob, 16);
         public static readonly StFieldId Blob_FundCode = new StFieldId(StTypeCode.Blob, 8);
-        public static readonly StFieldId Blob_Generator = new StFieldId(StTypeCode.Blob, 5);
+        public static readonly StFieldId Blob_HookParameterName = new StFieldId(StTypeCode.Blob, 24);
+        public static readonly StFieldId Blob_HookParameterValue = new StFieldId(StTypeCode.Blob, 25);
+        public static readonly StFieldId Blob_HookReturnString = new StFieldId(StTypeCode.Blob, 23);
+        public static readonly StFieldId Blob_HookStateData = new StFieldId(StTypeCode.Blob, 22);
         public static readonly StFieldId Blob_MasterSignature = new StFieldId(StTypeCode.Blob, 18);
         public static readonly StFieldId Blob_MemoData = new StFieldId(StTypeCode.Blob, 13);
         public static readonly StFieldId Blob_MemoFormat = new StFieldId(StTypeCode.Blob, 14);
@@ -384,6 +465,7 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Blob_SigningPubKey = new StFieldId(StTypeCode.Blob, 3);
         public static readonly StFieldId Blob_TxnSignature = new StFieldId(StTypeCode.Blob, 4);
         public static readonly StFieldId Blob_UNLModifyValidator = new StFieldId(StTypeCode.Blob, 19);
+        public static readonly StFieldId Blob_URI = new StFieldId(StTypeCode.Blob, 5);
         public static readonly StFieldId Blob_ValidatorToDisable = new StFieldId(StTypeCode.Blob, 20);
         public static readonly StFieldId Blob_ValidatorToReEnable = new StFieldId(StTypeCode.Blob, 21);
 
@@ -402,28 +484,50 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Hash256_CheckID = new StFieldId(StTypeCode.Hash256, 24);
         public static readonly StFieldId Hash256_ConsensusHash = new StFieldId(StTypeCode.Hash256, 23);
         public static readonly StFieldId Hash256_Digest = new StFieldId(StTypeCode.Hash256, 21);
+        public static readonly StFieldId Hash256_EmitHookHash = new StFieldId(StTypeCode.Hash256, 13);
+        public static readonly StFieldId Hash256_EmitNonce = new StFieldId(StTypeCode.Hash256, 12);
+        public static readonly StFieldId Hash256_EmitParentTxnID = new StFieldId(StTypeCode.Hash256, 11);
+        public static readonly StFieldId Hash256_HookHash = new StFieldId(StTypeCode.Hash256, 31);
+        public static readonly StFieldId Hash256_HookNamespace = new StFieldId(StTypeCode.Hash256, 32);
+        public static readonly StFieldId Hash256_HookSetTxnID = new StFieldId(StTypeCode.Hash256, 33);
+        public static readonly StFieldId Hash256_HookStateKey = new StFieldId(StTypeCode.Hash256, 30);
         public static readonly StFieldId Hash256_InvoiceID = new StFieldId(StTypeCode.Hash256, 17);
         public static readonly StFieldId Hash256_LedgerHash = new StFieldId(StTypeCode.Hash256, 1);
         public static readonly StFieldId Hash256_LedgerIndex = new StFieldId(StTypeCode.Hash256, 6);
+        public static readonly StFieldId Hash256_NFTokenBuyOffer = new StFieldId(StTypeCode.Hash256, 28);
+        public static readonly StFieldId Hash256_NFTokenID = new StFieldId(StTypeCode.Hash256, 10);
+        public static readonly StFieldId Hash256_NFTokenSellOffer = new StFieldId(StTypeCode.Hash256, 29);
+        public static readonly StFieldId Hash256_NextPageMin = new StFieldId(StTypeCode.Hash256, 27);
         public static readonly StFieldId Hash256_Nickname = new StFieldId(StTypeCode.Hash256, 18);
         public static readonly StFieldId Hash256_ParentHash = new StFieldId(StTypeCode.Hash256, 2);
+        public static readonly StFieldId Hash256_PreviousPageMin = new StFieldId(StTypeCode.Hash256, 26);
         public static readonly StFieldId Hash256_PreviousTxnID = new StFieldId(StTypeCode.Hash256, 5);
         public static readonly StFieldId Hash256_RootIndex = new StFieldId(StTypeCode.Hash256, 8);
-        public static readonly StFieldId Hash256_TicketID = new StFieldId(StTypeCode.Hash256, 20);
         public static readonly StFieldId Hash256_TransactionHash = new StFieldId(StTypeCode.Hash256, 3);
+        public static readonly StFieldId Hash256_ValidatedHash = new StFieldId(StTypeCode.Hash256, 25);
         public static readonly StFieldId Hash256_WalletLocator = new StFieldId(StTypeCode.Hash256, 7);
         public static readonly StFieldId Hash256_hash = new StFieldId(StTypeCode.Hash256, 257);
         public static readonly StFieldId Hash256_index = new StFieldId(StTypeCode.Hash256, 258);
 
         public static readonly StFieldId LedgerEntry_LedgerEntry = new StFieldId(StTypeCode.LedgerEntry, 1);
 
+        public static readonly StFieldId Metadata_Metadata = new StFieldId(StTypeCode.Metadata, 1);
+
         public static readonly StFieldId Object_CreatedNode = new StFieldId(StTypeCode.Object, 3);
         public static readonly StFieldId Object_DeletedNode = new StFieldId(StTypeCode.Object, 4);
         public static readonly StFieldId Object_DisabledValidator = new StFieldId(StTypeCode.Object, 19);
+        public static readonly StFieldId Object_EmitDetails = new StFieldId(StTypeCode.Object, 13);
+        public static readonly StFieldId Object_EmittedTxn = new StFieldId(StTypeCode.Object, 20);
         public static readonly StFieldId Object_FinalFields = new StFieldId(StTypeCode.Object, 7);
+        public static readonly StFieldId Object_Hook = new StFieldId(StTypeCode.Object, 14);
+        public static readonly StFieldId Object_HookDefinition = new StFieldId(StTypeCode.Object, 22);
+        public static readonly StFieldId Object_HookExecution = new StFieldId(StTypeCode.Object, 21);
+        public static readonly StFieldId Object_HookGrant = new StFieldId(StTypeCode.Object, 24);
+        public static readonly StFieldId Object_HookParameter = new StFieldId(StTypeCode.Object, 23);
         public static readonly StFieldId Object_Majority = new StFieldId(StTypeCode.Object, 18);
         public static readonly StFieldId Object_Memo = new StFieldId(StTypeCode.Object, 10);
         public static readonly StFieldId Object_ModifiedNode = new StFieldId(StTypeCode.Object, 5);
+        public static readonly StFieldId Object_NFToken = new StFieldId(StTypeCode.Object, 12);
         public static readonly StFieldId Object_NewFields = new StFieldId(StTypeCode.Object, 8);
         public static readonly StFieldId Object_ObjectEndMarker = new StFieldId(StTypeCode.Object, 1);
         public static readonly StFieldId Object_PreviousFields = new StFieldId(StTypeCode.Object, 6);
@@ -436,27 +540,37 @@ namespace Ibasa.Ripple.St
 
         public static readonly StFieldId Transaction_Transaction = new StFieldId(StTypeCode.Transaction, 1);
 
+        public static readonly StFieldId UInt16_HookApiVersion = new StFieldId(StTypeCode.UInt16, 20);
+        public static readonly StFieldId UInt16_HookEmitCount = new StFieldId(StTypeCode.UInt16, 18);
+        public static readonly StFieldId UInt16_HookExecutionIndex = new StFieldId(StTypeCode.UInt16, 19);
+        public static readonly StFieldId UInt16_HookStateChangeCount = new StFieldId(StTypeCode.UInt16, 17);
         public static readonly StFieldId UInt16_LedgerEntryType = new StFieldId(StTypeCode.UInt16, 1);
         public static readonly StFieldId UInt16_SignerWeight = new StFieldId(StTypeCode.UInt16, 3);
         public static readonly StFieldId UInt16_TransactionType = new StFieldId(StTypeCode.UInt16, 2);
+        public static readonly StFieldId UInt16_TransferFee = new StFieldId(StTypeCode.UInt16, 4);
         public static readonly StFieldId UInt16_Version = new StFieldId(StTypeCode.UInt16, 16);
 
         public static readonly StFieldId UInt32_BondAmount = new StFieldId(StTypeCode.UInt32, 23);
+        public static readonly StFieldId UInt32_BurnedNFTokens = new StFieldId(StTypeCode.UInt32, 44);
         public static readonly StFieldId UInt32_CancelAfter = new StFieldId(StTypeCode.UInt32, 36);
         public static readonly StFieldId UInt32_ClearFlag = new StFieldId(StTypeCode.UInt32, 34);
         public static readonly StFieldId UInt32_CloseTime = new StFieldId(StTypeCode.UInt32, 7);
         public static readonly StFieldId UInt32_DestinationTag = new StFieldId(StTypeCode.UInt32, 14);
+        public static readonly StFieldId UInt32_EmitGeneration = new StFieldId(StTypeCode.UInt32, 46);
         public static readonly StFieldId UInt32_Expiration = new StFieldId(StTypeCode.UInt32, 10);
         public static readonly StFieldId UInt32_FinishAfter = new StFieldId(StTypeCode.UInt32, 37);
         public static readonly StFieldId UInt32_FirstLedgerSequence = new StFieldId(StTypeCode.UInt32, 26);
         public static readonly StFieldId UInt32_Flags = new StFieldId(StTypeCode.UInt32, 2);
         public static readonly StFieldId UInt32_HighQualityIn = new StFieldId(StTypeCode.UInt32, 16);
         public static readonly StFieldId UInt32_HighQualityOut = new StFieldId(StTypeCode.UInt32, 17);
+        public static readonly StFieldId UInt32_HookStateCount = new StFieldId(StTypeCode.UInt32, 45);
         public static readonly StFieldId UInt32_LastLedgerSequence = new StFieldId(StTypeCode.UInt32, 27);
         public static readonly StFieldId UInt32_LedgerSequence = new StFieldId(StTypeCode.UInt32, 6);
         public static readonly StFieldId UInt32_LoadFee = new StFieldId(StTypeCode.UInt32, 24);
         public static readonly StFieldId UInt32_LowQualityIn = new StFieldId(StTypeCode.UInt32, 18);
         public static readonly StFieldId UInt32_LowQualityOut = new StFieldId(StTypeCode.UInt32, 19);
+        public static readonly StFieldId UInt32_MintedNFTokens = new StFieldId(StTypeCode.UInt32, 43);
+        public static readonly StFieldId UInt32_NFTokenTaxon = new StFieldId(StTypeCode.UInt32, 42);
         public static readonly StFieldId UInt32_OfferSequence = new StFieldId(StTypeCode.UInt32, 25);
         public static readonly StFieldId UInt32_OperationLimit = new StFieldId(StTypeCode.UInt32, 29);
         public static readonly StFieldId UInt32_OwnerCount = new StFieldId(StTypeCode.UInt32, 13);
@@ -483,15 +597,24 @@ namespace Ibasa.Ripple.St
 
         public static readonly StFieldId UInt64_BaseFee = new StFieldId(StTypeCode.UInt64, 5);
         public static readonly StFieldId UInt64_BookNode = new StFieldId(StTypeCode.UInt64, 3);
+        public static readonly StFieldId UInt64_Cookie = new StFieldId(StTypeCode.UInt64, 10);
         public static readonly StFieldId UInt64_DestinationNode = new StFieldId(StTypeCode.UInt64, 9);
+        public static readonly StFieldId UInt64_EmitBurden = new StFieldId(StTypeCode.UInt64, 13);
         public static readonly StFieldId UInt64_ExchangeRate = new StFieldId(StTypeCode.UInt64, 6);
         public static readonly StFieldId UInt64_HighNode = new StFieldId(StTypeCode.UInt64, 8);
+        public static readonly StFieldId UInt64_HookInstructionCount = new StFieldId(StTypeCode.UInt64, 17);
+        public static readonly StFieldId UInt64_HookOn = new StFieldId(StTypeCode.UInt64, 16);
+        public static readonly StFieldId UInt64_HookReturnCode = new StFieldId(StTypeCode.UInt64, 18);
         public static readonly StFieldId UInt64_IndexNext = new StFieldId(StTypeCode.UInt64, 1);
         public static readonly StFieldId UInt64_IndexPrevious = new StFieldId(StTypeCode.UInt64, 2);
         public static readonly StFieldId UInt64_LowNode = new StFieldId(StTypeCode.UInt64, 7);
+        public static readonly StFieldId UInt64_NFTokenOfferNode = new StFieldId(StTypeCode.UInt64, 12);
         public static readonly StFieldId UInt64_OwnerNode = new StFieldId(StTypeCode.UInt64, 4);
+        public static readonly StFieldId UInt64_ReferenceCount = new StFieldId(StTypeCode.UInt64, 19);
+        public static readonly StFieldId UInt64_ServerVersion = new StFieldId(StTypeCode.UInt64, 11);
 
         public static readonly StFieldId UInt8_CloseResolution = new StFieldId(StTypeCode.UInt8, 1);
+        public static readonly StFieldId UInt8_HookResult = new StFieldId(StTypeCode.UInt8, 18);
         public static readonly StFieldId UInt8_Method = new StFieldId(StTypeCode.UInt8, 2);
         public static readonly StFieldId UInt8_TickSize = new StFieldId(StTypeCode.UInt8, 16);
         public static readonly StFieldId UInt8_TransactionResult = new StFieldId(StTypeCode.UInt8, 3);
@@ -505,6 +628,7 @@ namespace Ibasa.Ripple.St
         public static readonly StFieldId Vector256_Amendments = new StFieldId(StTypeCode.Vector256, 3);
         public static readonly StFieldId Vector256_Hashes = new StFieldId(StTypeCode.Vector256, 2);
         public static readonly StFieldId Vector256_Indexes = new StFieldId(StTypeCode.Vector256, 1);
+        public static readonly StFieldId Vector256_NFTokenOffers = new StFieldId(StTypeCode.Vector256, 4);
 
     }
 
