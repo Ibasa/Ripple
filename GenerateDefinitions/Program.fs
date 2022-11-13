@@ -343,6 +343,13 @@ let knownTypes = Map.ofList [
         "reader.ReadPathSet()",
         "writer.WritePathSet({0}, {1})"
         )
+    "Array<NFToken>", (
+        false, 
+        "ReadOnlyCollection<NFToken>",
+        "new NFToken({0})", 
+        "new NFToken(ref reader)",
+        null
+        )
 ]
 
 let getFieldType (ledgerField : LedgerField) : string =
@@ -579,6 +586,36 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 field "BookNode" "A hint indicating which page of the offer directory links to this object, in case the directory consists of multiple pages."
                 fieldOpt "Expiration" "Indicates the time after which this offer is considered unfunded. See Specifying Time for details." |> withOverride "DateTimeOffset"
                 ownerNode
+                previousTxnID
+                previousTxnLgrSeq
+            ]
+        }
+        {
+            IsTransaction = false
+            Name = "NFTokenOffer"
+            Doc = "Tokens that have the lsfTransferable flag set can be transferred among participants using offers. The NFTokenOffer object represents an offer to buy, sell or transfer an NFToken object. The owner of a NFToken can use NFTokenCreateOffer to start a transaction."
+            Fields = [
+                field "Amount" "Amount expected or offered for the NFToken. If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP. Sell offers that specify assets other than XRP must specify a non-zero amount. Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to \"0\")."
+                fieldOpt "Destination" "The AccountID for which this offer is intended. If present, only that account can accept the offer."
+                fieldOpt "Expiration" "The time after which the offer is no longer active. The value is the number of seconds since the Ripple Epoch."
+                field "Flags" "A set of flags associated with this object, used to specify various options or settings."
+                field "NFTokenID" "NFTokenID of the NFToken object referenced by this offer."
+                fieldOpt "NFTokenOfferNode" "Internal bookkeeping, indicating the page inside the token buy or sell offer directory, as appropriate, where this token is being tracked. This field allows the efficient deletion of offers."
+                field "Owner" "	Owner of the account that is creating and owns the offer. Only the current Owner of an NFToken can create an offer to sell an NFToken, but any account can create an offer to buy an NFToken."
+                ownerNode
+                previousTxnID
+                previousTxnLgrSeq
+            ]
+        }
+        {
+            IsTransaction = false
+            Name = "NFTokenPage"
+            Doc = "The NFTokenPage object represents a collection of NFToken objects owned by the same account. An account can have multiple NFTokenPage ledger objects, which form a doubly linked list."
+            Fields = [
+                fieldOpt "NextPageMin" "The locator of the next page, if any. Details about this field and how it should be used are outlined below, after the construction of the NFTokenPageID is explained."
+                field "NFTokens" "The collection of NFToken objects contained in this NFTokenPage object. This specification places an upper bound of 32 NFToken objects per page. Objects should be stored in sorted order, from low to high with the TokenID used as the sorting parameter." |> withOverride "Array<NFToken>"
+                fieldOpt "PreviousPageMin" "The locator of the previous page, if any. Details about this field and how it should be used are outlined below, after the construction of the NFTokenPageID is explained."
+                field "Flags" "A set of flags associated with this object, used to specify various options or settings."
                 previousTxnID
                 previousTxnLgrSeq
             ]

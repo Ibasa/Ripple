@@ -2322,6 +2322,312 @@ namespace Ibasa.Ripple
     }
 
     /// <summary>
+    /// Tokens that have the lsfTransferable flag set can be transferred among participants using offers. The NFTokenOffer object represents an offer to buy, sell or transfer an NFToken object. The owner of a NFToken can use NFTokenCreateOffer to start a transaction.
+    /// </summary>
+    public sealed partial class NFTokenOfferLedgerEntry : LedgerObject
+    {
+        /// <summary>
+        /// Amount expected or offered for the NFToken. If the token has the lsfOnlyXRP flag set, the amount must be specified in XRP. Sell offers that specify assets other than XRP must specify a non-zero amount. Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to "0").
+        /// </summary>
+        public Amount Amount { get; private set; }
+
+        /// <summary>
+        /// (Optional) The AccountID for which this offer is intended. If present, only that account can accept the offer.
+        /// </summary>
+        public AccountId? Destination { get; private set; }
+
+        /// <summary>
+        /// (Optional) The time after which the offer is no longer active. The value is the number of seconds since the Ripple Epoch.
+        /// </summary>
+        public uint? Expiration { get; private set; }
+
+        /// <summary>
+        /// A set of flags associated with this object, used to specify various options or settings.
+        /// </summary>
+        public uint Flags { get; private set; }
+
+        /// <summary>
+        /// NFTokenID of the NFToken object referenced by this offer.
+        /// </summary>
+        public Hash256 NFTokenID { get; private set; }
+
+        /// <summary>
+        /// (Optional) Internal bookkeeping, indicating the page inside the token buy or sell offer directory, as appropriate, where this token is being tracked. This field allows the efficient deletion of offers.
+        /// </summary>
+        public ulong? NFTokenOfferNode { get; private set; }
+
+        /// <summary>
+        /// 	Owner of the account that is creating and owns the offer. Only the current Owner of an NFToken can create an offer to sell an NFToken, but any account can create an offer to buy an NFToken.
+        /// </summary>
+        public AccountId Owner { get; private set; }
+
+        /// <summary>
+        /// A hint indicating which page of the sender's owner directory links to this object, in case the directory consists of multiple pages. Note: The object does not contain a direct link to the owner directory containing it, since that value can be derived from the Account.
+        /// </summary>
+        public ulong OwnerNode { get; private set; }
+
+        /// <summary>
+        /// The identifying hash of the transaction that most recently modified this object.
+        /// </summary>
+        public Hash256 PreviousTxnID { get; private set; }
+
+        /// <summary>
+        /// The index of the ledger that contains the transaction that most recently modified this object.
+        /// </summary>
+        public uint PreviousTxnLgrSeq { get; private set; }
+
+        internal NFTokenOfferLedgerEntry(JsonElement json)
+        {
+            if (json.GetProperty("LedgerEntryType").GetString() != "NFTokenOffer")
+            {
+                throw new ArgumentException("Expected property \"LedgerEntryType\" to be \"NFTokenOffer\"", "json");
+            }
+            JsonElement element;
+
+            Amount = Ripple.Amount.ReadJson(json.GetProperty("Amount"));
+            if (json.TryGetProperty("Destination", out element))
+            {
+                Destination = new AccountId(element.GetString());
+            }
+            if (json.TryGetProperty("Expiration", out element))
+            {
+                Expiration = element.GetUInt32();
+            }
+            Flags = json.GetProperty("Flags").GetUInt32();
+            NFTokenID = new Hash256(json.GetProperty("NFTokenID").GetString());
+            if (json.TryGetProperty("NFTokenOfferNode", out element))
+            {
+                NFTokenOfferNode = ulong.Parse(element.GetString(), System.Globalization.NumberStyles.AllowHexSpecifier);
+            }
+            Owner = new AccountId(json.GetProperty("Owner").GetString());
+            OwnerNode = ulong.Parse(json.GetProperty("OwnerNode").GetString(), System.Globalization.NumberStyles.AllowHexSpecifier);
+            PreviousTxnID = new Hash256(json.GetProperty("PreviousTxnID").GetString());
+            PreviousTxnLgrSeq = json.GetProperty("PreviousTxnLgrSeq").GetUInt32();
+        }
+
+        internal NFTokenOfferLedgerEntry(ref StReader reader)
+        {
+            StFieldId fieldId = reader.ReadFieldId();
+            if (fieldId != StFieldId.UInt32_Flags)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+            }
+            Flags = reader.ReadUInt32();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+            }
+            PreviousTxnLgrSeq = reader.ReadUInt32();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.UInt32_Expiration)
+            {
+                Expiration = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId != StFieldId.UInt64_OwnerNode)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+            }
+            OwnerNode = reader.ReadUInt64();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.UInt64_NFTokenOfferNode)
+            {
+                NFTokenOfferNode = reader.ReadUInt64();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId != StFieldId.Hash256_PreviousTxnID)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+            }
+            PreviousTxnID = reader.ReadHash256();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.Hash256_NFTokenID)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_NFTokenID, fieldId));
+            }
+            NFTokenID = reader.ReadHash256();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.Amount_Amount)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+            }
+            Amount = reader.ReadAmount();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.AccountID_Owner)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
+            }
+            Owner = reader.ReadAccount();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                return;
+            }
+            if (fieldId == StFieldId.AccountID_Destination)
+            {
+                Destination = reader.ReadAccount();
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// The NFTokenPage object represents a collection of NFToken objects owned by the same account. An account can have multiple NFTokenPage ledger objects, which form a doubly linked list.
+    /// </summary>
+    public sealed partial class NFTokenPageLedgerEntry : LedgerObject
+    {
+        /// <summary>
+        /// (Optional) The locator of the next page, if any. Details about this field and how it should be used are outlined below, after the construction of the NFTokenPageID is explained.
+        /// </summary>
+        public Hash256? NextPageMin { get; private set; }
+
+        /// <summary>
+        /// The collection of NFToken objects contained in this NFTokenPage object. This specification places an upper bound of 32 NFToken objects per page. Objects should be stored in sorted order, from low to high with the TokenID used as the sorting parameter.
+        /// </summary>
+        public ReadOnlyCollection<NFToken> NFTokens { get; private set; }
+
+        /// <summary>
+        /// (Optional) The locator of the previous page, if any. Details about this field and how it should be used are outlined below, after the construction of the NFTokenPageID is explained.
+        /// </summary>
+        public Hash256? PreviousPageMin { get; private set; }
+
+        /// <summary>
+        /// A set of flags associated with this object, used to specify various options or settings.
+        /// </summary>
+        public uint Flags { get; private set; }
+
+        /// <summary>
+        /// The identifying hash of the transaction that most recently modified this object.
+        /// </summary>
+        public Hash256 PreviousTxnID { get; private set; }
+
+        /// <summary>
+        /// The index of the ledger that contains the transaction that most recently modified this object.
+        /// </summary>
+        public uint PreviousTxnLgrSeq { get; private set; }
+
+        internal NFTokenPageLedgerEntry(JsonElement json)
+        {
+            if (json.GetProperty("LedgerEntryType").GetString() != "NFTokenPage")
+            {
+                throw new ArgumentException("Expected property \"LedgerEntryType\" to be \"NFTokenPage\"", "json");
+            }
+            JsonElement element;
+
+            if (json.TryGetProperty("NextPageMin", out element))
+            {
+                NextPageMin = new Hash256(element.GetString());
+            }
+            element = json.GetProperty("NFTokens");
+            var NFTokensArray = new NFToken[element.GetArrayLength()];
+            for (int i = 0; i < NFTokensArray.Length; ++i)
+            {
+                NFTokensArray[i] = new NFToken(element[i]);
+            }
+            NFTokens = Array.AsReadOnly(NFTokensArray);
+            if (json.TryGetProperty("PreviousPageMin", out element))
+            {
+                PreviousPageMin = new Hash256(element.GetString());
+            }
+            Flags = json.GetProperty("Flags").GetUInt32();
+            PreviousTxnID = new Hash256(json.GetProperty("PreviousTxnID").GetString());
+            PreviousTxnLgrSeq = json.GetProperty("PreviousTxnLgrSeq").GetUInt32();
+        }
+
+        internal NFTokenPageLedgerEntry(ref StReader reader)
+        {
+            StFieldId fieldId = reader.ReadFieldId();
+            if (fieldId != StFieldId.UInt32_Flags)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+            }
+            Flags = reader.ReadUInt32();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+            }
+            PreviousTxnLgrSeq = reader.ReadUInt32();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId != StFieldId.Hash256_PreviousTxnID)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+            }
+            PreviousTxnID = reader.ReadHash256();
+            if (!reader.TryReadFieldId(out fieldId))
+            {
+                throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.Hash256_PreviousPageMin)
+            {
+                PreviousPageMin = reader.ReadHash256();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId == StFieldId.Hash256_NextPageMin)
+            {
+                NextPageMin = reader.ReadHash256();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId != StFieldId.Array_NFTokens)
+            {
+                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Array_NFTokens, fieldId));
+            }
+            var NFTokensList = new System.Collections.Generic.List<NFToken>();
+            while (true)
+            {
+                fieldId = reader.ReadFieldId();
+                if (fieldId == StFieldId.Array_ArrayEndMarker)
+                {
+                    break;
+                }
+                if (fieldId != StFieldId.Object_NFToken)
+                {
+                    throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_NFToken, fieldId));
+                }
+                NFTokensList.Add(new NFToken(ref reader));
+            }
+            NFTokens = NFTokensList.AsReadOnly();
+        }
+
+    }
+
+    /// <summary>
     /// The PayChannel object type represents a payment channel. Payment channels enable small, rapid off-ledger payments of XRP that can be later reconciled with the consensus ledger. A payment channel holds a balance of XRP that can only be paid out to a specific destination address until the channel is closed. Any unspent XRP is returned to the channel's owner (the source address that created and funded it) when the channel closes.
     /// </summary>
     public sealed partial class PayChannelLedgerEntry : LedgerObject

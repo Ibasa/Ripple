@@ -81,6 +81,10 @@ namespace Ibasa.Ripple
                     return new CheckLedgerEntry(ref reader);
                 case StLedgerEntryType.NegativeUNL:
                     return new NegativeUNLLedgerEntry(ref reader);
+                case StLedgerEntryType.NFTokenOffer:
+                    return new NFTokenOfferLedgerEntry(ref reader);
+                case StLedgerEntryType.NFTokenPage:
+                    return new NFTokenPageLedgerEntry(ref reader);
             }
 
             throw new RippleException(string.Format("Unrecognized ledger entry type: {0}", type));
@@ -120,6 +124,10 @@ namespace Ibasa.Ripple
                     return new CheckLedgerEntry(json);
                 case "NegativeUNL":
                     return new NegativeUNLLedgerEntry(json);
+                case "NFTokenOffer":
+                    return new NFTokenOfferLedgerEntry(json);
+                case "NFTokenPage":
+                    return new NFTokenPageLedgerEntry(json);
             }
 
             throw new RippleException(string.Format("Unrecognized ledger entry type: {0}", type));
