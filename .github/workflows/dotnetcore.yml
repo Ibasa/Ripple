@@ -21,14 +21,10 @@ jobs:
       uses: docker/setup-buildx-action@v1
       with:
         install: true
-    - name: Setup .NET Core 5.0
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET Core 6.0
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.102
-    - name: Setup .NET Core 3.1
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.102
+        dotnet-version: 6.0.403
     - name: Build with dotnet
       run: dotnet build --configuration Release
     - name: Test with dotnet
