@@ -1517,6 +1517,11 @@ namespace Ibasa.Ripple
         /// </summary>
         public AccountId? TakerGetsIssuer { get; private set; }
 
+        /// <summary>
+        /// (Optional) TOOD Unknown documentation.
+        /// </summary>
+        public Hash256? NFTokenID { get; private set; }
+
         internal DirectoryNodeLedgerEntry(JsonElement json)
         {
             if (json.GetProperty("LedgerEntryType").GetString() != "DirectoryNode")
@@ -1566,6 +1571,10 @@ namespace Ibasa.Ripple
             {
                 TakerGetsIssuer = new AccountId(element.GetBytesFromBase16());
             }
+            if (json.TryGetProperty("NFTokenID", out element))
+            {
+                NFTokenID = new Hash256(element.GetString());
+            }
         }
 
         internal DirectoryNodeLedgerEntry(ref StReader reader)
@@ -1612,6 +1621,14 @@ namespace Ibasa.Ripple
             if (!reader.TryReadFieldId(out fieldId))
             {
                 throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.Hash256_NFTokenID)
+            {
+                NFTokenID = reader.ReadHash256();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
             }
             if (fieldId == StFieldId.AccountID_Owner)
             {

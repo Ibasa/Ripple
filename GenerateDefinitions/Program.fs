@@ -518,6 +518,8 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "TakerPaysIssuer" "(Offer Directories only) The issuer of the TakerPays amount from the offers in this directory." |> withOverride "Hash160_AccountId"
                 fieldOpt "TakerGetsCurrency" "(Offer Directories only) The currency code of the TakerGets amount from the offers in this directory." |> withOverride "Hash160_CurrencyCode"
                 fieldOpt "TakerGetsIssuer" "(Offer Directories only) The issuer of the TakerGets amount from the offers in this directory." |> withOverride "Hash160_AccountId"
+                fieldOpt "NFTokenID" "TOOD Unknown documentation."
+
             ]
         }
         {
