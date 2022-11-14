@@ -18,9 +18,9 @@ namespace Ibasa.Ripple
         /// <summary>
         /// The URI field points to the data and/or metadata associated with the NFToken.
         /// </summary>
-        public string URI { get; }
+        public string? URI { get; }
 
-        public NFToken(Hash256 nfTokenId, string uri)
+        public NFToken(Hash256 nfTokenId, string? uri)
         {
             NFTokenID = nfTokenId;
             URI = uri;
@@ -41,12 +41,15 @@ namespace Ibasa.Ripple
             }
             NFTokenID = reader.ReadHash256();
             fieldId = reader.ReadFieldId();
-            if (fieldId != StFieldId.Blob_URI)
+            if (fieldId == StFieldId.Blob_URI)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_URI, fieldId));
+                URI = System.Text.Encoding.ASCII.GetString(reader.ReadBlob());
+                fieldId = reader.ReadFieldId();
+            } 
+            else
+            {
+                URI = null;
             }
-            URI = System.Text.Encoding.ASCII.GetString(reader.ReadBlob());
-            fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.Object_ObjectEndMarker)
             {
                 throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
