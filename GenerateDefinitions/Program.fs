@@ -141,6 +141,7 @@ type LedgerField = {
     Doc : string
     Nth : int
     IsSigningField : bool
+    Deprecated : bool
 }
     
 type LedgerType = { IsTransaction: bool; Name : string; Doc : string; Fields : LedgerField list }
@@ -409,6 +410,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
             OriginalType = fieldType
             Type = fieldType 
             Optional = false
+            Deprecated = false
         }
 
     let fieldOpt name doc =
@@ -421,6 +423,20 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
             OriginalType = fieldType
             Type = fieldType 
             Optional = true
+            Deprecated = false
+        }
+
+    let fieldDeprecated name doc =
+        let fieldType, nth, isSigningField = fields.[name]
+        {
+            Name = name
+            Doc = doc
+            Nth = nth
+            IsSigningField = isSigningField
+            OriginalType = fieldType
+            Type = fieldType
+            Optional = true
+            Deprecated = true
         }
 
     let withOverride (typeName : string) (field : LedgerField) = 
@@ -457,6 +473,8 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "MintedNFTokens" "How many total non-fungible tokens have been minted by and on behalf of this account."
                 fieldOpt "NFTokenMinter" "Another account that is authorized to mint non-fungible tokens on behalf of this account."
                 fieldOpt "TicketCount" "How many significant digits to use for exchange rates of Offers involving currencies issued by this address. Valid values are 3 to 15, inclusive. (Added by the TickSize amendment.)"
+                fieldDeprecated "WalletLocator" "Do not use."
+                fieldDeprecated "WalletSize" "Do not use."
             ]
         }
         {
@@ -963,6 +981,8 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
             let opt = if field.Optional then "(Optional) " else ""
             writer.WriteLine("        /// {0}{1}", opt, field.Doc)
             writer.WriteLine("        /// </summary>")
+            if field.Deprecated then
+                writer.WriteLine("        [Obsolete]")
             writer.WriteLine("        public {0} {1} {{ get; {2}set; }}", getFieldType field, fieldName, if ledgerType.IsTransaction then "" else "private ");
             writer.WriteLine()
 

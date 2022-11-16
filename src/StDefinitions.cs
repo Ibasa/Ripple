@@ -821,6 +821,18 @@ namespace Ibasa.Ripple
         /// </summary>
         public uint? TicketCount { get; private set; }
 
+        /// <summary>
+        /// (Optional) Do not use.
+        /// </summary>
+        [Obsolete]
+        public Hash256? WalletLocator { get; private set; }
+
+        /// <summary>
+        /// (Optional) Do not use.
+        /// </summary>
+        [Obsolete]
+        public uint? WalletSize { get; private set; }
+
         internal AccountRootLedgerEntry(JsonElement json)
         {
             if (json.GetProperty("LedgerEntryType").GetString() != "AccountRoot")
@@ -880,6 +892,14 @@ namespace Ibasa.Ripple
             {
                 TicketCount = element.GetUInt32();
             }
+            if (json.TryGetProperty("WalletLocator", out element))
+            {
+                WalletLocator = new Hash256(element.GetString());
+            }
+            if (json.TryGetProperty("WalletSize", out element))
+            {
+                WalletSize = element.GetUInt32();
+            }
         }
 
         internal AccountRootLedgerEntry(ref StReader reader)
@@ -915,6 +935,14 @@ namespace Ibasa.Ripple
             if (fieldId == StFieldId.UInt32_TransferRate)
             {
                 TransferRate = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
+            }
+            if (fieldId == StFieldId.UInt32_WalletSize)
+            {
+                WalletSize = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
                     throw new Exception("End of st data reached but non-optional fields still not set");
@@ -969,6 +997,14 @@ namespace Ibasa.Ripple
             if (!reader.TryReadFieldId(out fieldId))
             {
                 throw new Exception("End of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.Hash256_WalletLocator)
+            {
+                WalletLocator = reader.ReadHash256();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("End of st data reached but non-optional fields still not set");
+                }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
             {
