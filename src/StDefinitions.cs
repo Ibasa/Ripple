@@ -907,37 +907,37 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = (AccountRootFlags)reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TransferRate)
             {
                 TransferRate = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_WalletSize)
@@ -945,24 +945,24 @@ namespace Ibasa.Ripple
                 WalletSize = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_OwnerCount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_OwnerCount, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_OwnerCount, fieldId));
             }
             OwnerCount = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TicketCount)
             {
                 TicketCount = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_MintedNFTokens)
@@ -970,7 +970,7 @@ namespace Ibasa.Ripple
                 MintedNFTokens = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_BurnedNFTokens)
@@ -978,7 +978,7 @@ namespace Ibasa.Ripple
                 BurnedNFTokens = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash128_EmailHash)
@@ -986,24 +986,24 @@ namespace Ibasa.Ripple
                 EmailHash = reader.ReadHash128();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Hash256_WalletLocator)
             {
                 WalletLocator = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -1011,24 +1011,24 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Balance)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
             }
             Balance = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_MessageKey)
             {
                 MessageKey = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Domain)
@@ -1036,12 +1036,12 @@ namespace Ibasa.Ripple
                 Domain = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountRootLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read AccountRootLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -1126,7 +1126,7 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read AmendmentsLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
@@ -1149,7 +1149,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Majority)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Majority, fieldId));
+                        throw new Exception(string.Format("Could not read AmendmentsLedgerEntry, expected {0} but got {1}", StFieldId.Object_Majority, fieldId));
                     }
                     MajoritiesList.Add(new Majority(ref reader));
                 }
@@ -1276,45 +1276,45 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
             {
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
@@ -1322,64 +1322,64 @@ namespace Ibasa.Ripple
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt64_DestinationNode)
             {
                 DestinationNode = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Hash256_InvoiceID)
             {
                 InvoiceID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_SendMax)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_SendMax, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.Amount_SendMax, fieldId));
             }
             SendMax = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read CheckLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
         }
@@ -1441,52 +1441,52 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Authorize)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Authorize, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Authorize, fieldId));
             }
             Authorize = reader.ReadAccount();
         }
@@ -1618,19 +1618,19 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read DirectoryNodeLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt64_IndexNext)
             {
                 IndexNext = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt64_IndexPrevious)
@@ -1638,7 +1638,7 @@ namespace Ibasa.Ripple
                 IndexPrevious = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt64_ExchangeRate)
@@ -1646,24 +1646,24 @@ namespace Ibasa.Ripple
                 ExchangeRate = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_RootIndex)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_RootIndex, fieldId));
+                throw new Exception(string.Format("Could not read DirectoryNodeLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_RootIndex, fieldId));
             }
             RootIndex = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Hash256_NFTokenID)
             {
                 NFTokenID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.AccountID_Owner)
@@ -1671,7 +1671,7 @@ namespace Ibasa.Ripple
                 Owner = reader.ReadAccount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash160_TakerPaysCurrency)
@@ -1679,7 +1679,7 @@ namespace Ibasa.Ripple
                 TakerPaysCurrency = ToCurrencyCode(reader.ReadHash160());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash160_TakerPaysIssuer)
@@ -1687,7 +1687,7 @@ namespace Ibasa.Ripple
                 TakerPaysIssuer = ToAccountId(reader.ReadHash160());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash160_TakerGetsCurrency)
@@ -1695,7 +1695,7 @@ namespace Ibasa.Ripple
                 TakerGetsCurrency = ToCurrencyCode(reader.ReadHash160());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash160_TakerGetsIssuer)
@@ -1703,12 +1703,12 @@ namespace Ibasa.Ripple
                 TakerGetsIssuer = ToAccountId(reader.ReadHash160());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DirectoryNodeLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Vector256_Indexes)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Vector256_Indexes, fieldId));
+                throw new Exception(string.Format("Could not read DirectoryNodeLedgerEntry, expected {0} but got {1}", StFieldId.Vector256_Indexes, fieldId));
             }
             Indexes = Array.AsReadOnly(reader.ReadVector256());
         }
@@ -1831,36 +1831,36 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
             {
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
             {
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_CancelAfter)
@@ -1868,7 +1868,7 @@ namespace Ibasa.Ripple
                 CancelAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_FinishAfter)
@@ -1876,64 +1876,64 @@ namespace Ibasa.Ripple
                 FinishAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt64_DestinationNode)
             {
                 DestinationNode = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_Condition)
             {
                 Condition = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read EscrowLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
         }
@@ -1989,43 +1989,43 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read FeeSettingsLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read FeeSettingsLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_ReferenceFeeUnits)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_ReferenceFeeUnits, fieldId));
+                throw new Exception(string.Format("Could not read FeeSettingsLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_ReferenceFeeUnits, fieldId));
             }
             ReferenceFeeUnits = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read FeeSettingsLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_ReserveBase)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_ReserveBase, fieldId));
+                throw new Exception(string.Format("Could not read FeeSettingsLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_ReserveBase, fieldId));
             }
             ReserveBase = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read FeeSettingsLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_ReserveIncrement)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_ReserveIncrement, fieldId));
+                throw new Exception(string.Format("Could not read FeeSettingsLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_ReserveIncrement, fieldId));
             }
             ReserveIncrement = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read FeeSettingsLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_BaseFee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_BaseFee, fieldId));
+                throw new Exception(string.Format("Could not read FeeSettingsLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_BaseFee, fieldId));
             }
             BaseFee = reader.ReadUInt64();
         }
@@ -2076,25 +2076,25 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read LedgerHashesLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read LedgerHashesLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_LastLedgerSequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_LastLedgerSequence, fieldId));
+                throw new Exception(string.Format("Could not read LedgerHashesLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_LastLedgerSequence, fieldId));
             }
             LastLedgerSequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read LedgerHashesLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Vector256_Hashes)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Vector256_Hashes, fieldId));
+                throw new Exception(string.Format("Could not read LedgerHashesLedgerEntry, expected {0} but got {1}", StFieldId.Vector256_Hashes, fieldId));
             }
             Hashes = Array.AsReadOnly(reader.ReadVector256());
         }
@@ -2179,7 +2179,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_DisabledValidator)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_DisabledValidator, fieldId));
+                        throw new Exception(string.Format("Could not read NegativeUNLLedgerEntry, expected {0} but got {1}", StFieldId.Object_DisabledValidator, fieldId));
                     }
                     DisabledValidatorsList.Add(new DisabledValidator(ref reader));
                 }
@@ -2278,96 +2278,96 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = (OfferFlags)reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt64_BookNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_BookNode, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_BookNode, fieldId));
             }
             BookNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_BookDirectory)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_BookDirectory, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_BookDirectory, fieldId));
             }
             BookDirectory = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_TakerPays)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_TakerPays, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.Amount_TakerPays, fieldId));
             }
             TakerPays = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_TakerGets)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_TakerGets, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.Amount_TakerGets, fieldId));
             }
             TakerGets = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read OfferLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
         }
@@ -2463,77 +2463,77 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt64_NFTokenOfferNode)
             {
                 NFTokenOfferNode = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_NFTokenID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_NFTokenID, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_NFTokenID, fieldId));
             }
             NFTokenID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenOfferLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Owner)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenOfferLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
             }
             Owner = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -2616,37 +2616,37 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenPageLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenPageLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenPageLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenPageLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenPageLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read NFTokenPageLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Hash256_PreviousPageMin)
             {
                 PreviousPageMin = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read NFTokenPageLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_NextPageMin)
@@ -2654,12 +2654,12 @@ namespace Ibasa.Ripple
                 NextPageMin = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read NFTokenPageLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Array_NFTokens)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Array_NFTokens, fieldId));
+                throw new Exception(string.Format("Could not read NFTokenPageLedgerEntry, expected {0} but got {1}", StFieldId.Array_NFTokens, fieldId));
             }
             var NFTokensList = new System.Collections.Generic.List<NFToken>();
             while (true)
@@ -2671,7 +2671,7 @@ namespace Ibasa.Ripple
                 }
                 if (fieldId != StFieldId.Object_NFToken)
                 {
-                    throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_NFToken, fieldId));
+                    throw new Exception(string.Format("Could not read NFTokenPageLedgerEntry, expected {0} but got {1}", StFieldId.Object_NFToken, fieldId));
                 }
                 NFTokensList.Add(new NFToken(ref reader));
             }
@@ -2805,36 +2805,36 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
             {
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
@@ -2842,7 +2842,7 @@ namespace Ibasa.Ripple
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_CancelAfter)
@@ -2850,83 +2850,83 @@ namespace Ibasa.Ripple
                 CancelAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_SettleDelay)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_SettleDelay, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_SettleDelay, fieldId));
             }
             SettleDelay = TimeSpan.FromSeconds(reader.ReadUInt32());
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt64_DestinationNode)
             {
                 DestinationNode = reader.ReadUInt64();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Balance)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
             }
             Balance = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_PublicKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_PublicKey, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.Blob_PublicKey, fieldId));
             }
             PublicKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PayChannelLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read PayChannelLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
         }
@@ -3037,28 +3037,28 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = (RippleStateFlags)reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_HighQualityIn)
             {
                 HighQualityIn = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_HighQualityOut)
@@ -3066,7 +3066,7 @@ namespace Ibasa.Ripple
                 HighQualityOut = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LowQualityIn)
@@ -3074,7 +3074,7 @@ namespace Ibasa.Ripple
                 LowQualityIn = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LowQualityOut)
@@ -3082,57 +3082,57 @@ namespace Ibasa.Ripple
                 LowQualityOut = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt64_LowNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_LowNode, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_LowNode, fieldId));
             }
             LowNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_HighNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_HighNode, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_HighNode, fieldId));
             }
             HighNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Balance)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.Amount_Balance, fieldId));
             }
             Balance = reader.ReadIssuedAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_LowLimit)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_LowLimit, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.Amount_LowLimit, fieldId));
             }
             LowLimit = reader.ReadIssuedAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read RippleStateLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_HighLimit)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_HighLimit, fieldId));
+                throw new Exception(string.Format("Could not read RippleStateLedgerEntry, expected {0} but got {1}", StFieldId.Amount_HighLimit, fieldId));
             }
             HighLimit = reader.ReadIssuedAmount();
         }
@@ -3207,61 +3207,61 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = (SignerListFlags)reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_SignerQuorum)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_SignerQuorum, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_SignerQuorum, fieldId));
             }
             SignerQuorum = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_SignerListID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_SignerListID, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_SignerListID, fieldId));
             }
             SignerListID = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Array_SignerEntries)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Array_SignerEntries, fieldId));
+                throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.Array_SignerEntries, fieldId));
             }
             var SignerEntriesList = new System.Collections.Generic.List<SignerEntry>();
             while (true)
@@ -3273,7 +3273,7 @@ namespace Ibasa.Ripple
                 }
                 if (fieldId != StFieldId.Object_SignerEntry)
                 {
-                    throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_SignerEntry, fieldId));
+                    throw new Exception(string.Format("Could not read SignerListLedgerEntry, expected {0} but got {1}", StFieldId.Object_SignerEntry, fieldId));
                 }
                 SignerEntriesList.Add(new SignerEntry(ref reader));
             }
@@ -3337,52 +3337,52 @@ namespace Ibasa.Ripple
             StFieldId fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_Flags)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_Flags, fieldId));
             }
             Flags = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_PreviousTxnLgrSeq)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_PreviousTxnLgrSeq, fieldId));
             }
             PreviousTxnLgrSeq = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_TicketSequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_TicketSequence, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.UInt32_TicketSequence, fieldId));
             }
             TicketSequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt64_OwnerNode)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.UInt64_OwnerNode, fieldId));
             }
             OwnerNode = reader.ReadUInt64();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Hash256_PreviousTxnID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.Hash256_PreviousTxnID, fieldId));
             }
             PreviousTxnID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketLedgerEntry, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read TicketLedgerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
         }
@@ -3479,7 +3479,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -3487,24 +3487,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TransferRate)
             {
                 TransferRate = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -3512,7 +3512,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SetFlag)
@@ -3520,7 +3520,7 @@ namespace Ibasa.Ripple
                 SetFlag = (AccountSetFlags)reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_ClearFlag)
@@ -3528,7 +3528,7 @@ namespace Ibasa.Ripple
                 ClearFlag = (AccountSetFlags)reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -3536,7 +3536,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash128_EmailHash)
@@ -3544,7 +3544,7 @@ namespace Ibasa.Ripple
                 EmailHash = reader.ReadHash128();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -3552,41 +3552,41 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_MessageKey)
             {
                 MessageKey = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Domain)
@@ -3594,12 +3594,12 @@ namespace Ibasa.Ripple
                 Domain = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -3622,7 +3622,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -3644,7 +3644,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read AccountSetTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -3785,7 +3785,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -3793,24 +3793,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
             {
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -3818,7 +3818,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -3826,7 +3826,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -3834,47 +3834,47 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read AccountDeleteTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -3897,7 +3897,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -3915,7 +3915,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read AccountDeleteTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -4019,7 +4019,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -4027,24 +4027,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -4052,7 +4052,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -4060,47 +4060,47 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_CheckID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_CheckID, fieldId));
+                throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.Hash256_CheckID, fieldId));
             }
             CheckID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -4123,7 +4123,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -4141,7 +4141,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCancelTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -4260,7 +4260,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -4268,24 +4268,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -4293,7 +4293,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -4301,63 +4301,63 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_CheckID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_CheckID, fieldId));
+                throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.Hash256_CheckID, fieldId));
             }
             CheckID = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Amount_Amount)
             {
                 Amount = reader.ReadAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Amount_DeliverMin)
             {
                 DeliverMin = reader.ReadAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCashTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -4380,7 +4380,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -4398,7 +4398,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCashTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -4540,7 +4540,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -4548,24 +4548,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
@@ -4573,7 +4573,7 @@ namespace Ibasa.Ripple
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -4581,7 +4581,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -4589,7 +4589,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -4597,7 +4597,7 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_InvoiceID)
@@ -4605,56 +4605,56 @@ namespace Ibasa.Ripple
                 InvoiceID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_SendMax)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_SendMax, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.Amount_SendMax, fieldId));
             }
             SendMax = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read CheckCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -4677,7 +4677,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -4695,7 +4695,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read CheckCreateTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -4821,7 +4821,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -4829,24 +4829,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -4854,7 +4854,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -4862,38 +4862,38 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read DepositPreauthTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -4932,7 +4932,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -4950,7 +4950,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read DepositPreauthTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -5063,7 +5063,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -5071,33 +5071,33 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_OfferSequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
             }
             OfferSequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -5105,7 +5105,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -5113,47 +5113,47 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Owner)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
             }
             Owner = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -5176,7 +5176,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -5194,7 +5194,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowCancelTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -5338,7 +5338,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -5346,24 +5346,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
             {
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -5371,7 +5371,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_CancelAfter)
@@ -5379,7 +5379,7 @@ namespace Ibasa.Ripple
                 CancelAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_FinishAfter)
@@ -5387,7 +5387,7 @@ namespace Ibasa.Ripple
                 FinishAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -5395,7 +5395,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -5403,42 +5403,42 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Condition)
@@ -5446,21 +5446,21 @@ namespace Ibasa.Ripple
                 Condition = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -5483,7 +5483,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -5501,7 +5501,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowCreateTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -5643,7 +5643,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -5651,33 +5651,33 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_OfferSequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
             }
             OfferSequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -5685,7 +5685,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -5693,33 +5693,33 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Fulfillment)
@@ -5727,7 +5727,7 @@ namespace Ibasa.Ripple
                 Fulfillment = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Condition)
@@ -5735,21 +5735,21 @@ namespace Ibasa.Ripple
                 Condition = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read EscrowFinishTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Owner)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
+                throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.AccountID_Owner, fieldId));
             }
             Owner = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -5772,7 +5772,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -5790,7 +5790,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read EscrowFinishTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -5899,7 +5899,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -5907,33 +5907,33 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.UInt32_OfferSequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
+                throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.UInt32_OfferSequence, fieldId));
             }
             OfferSequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -5941,7 +5941,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -5949,38 +5949,38 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCancelTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -6003,7 +6003,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -6021,7 +6021,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read OfferCancelTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -6146,7 +6146,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -6154,24 +6154,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_OfferSequence)
@@ -6179,7 +6179,7 @@ namespace Ibasa.Ripple
                 OfferSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -6187,7 +6187,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -6195,7 +6195,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -6203,56 +6203,56 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_TakerPays)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_TakerPays, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Amount_TakerPays, fieldId));
             }
             TakerPays = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_TakerGets)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_TakerGets, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Amount_TakerGets, fieldId));
             }
             TakerGets = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read OfferCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -6275,7 +6275,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -6293,7 +6293,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read OfferCreateTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -6454,7 +6454,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -6462,24 +6462,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
             {
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -6487,7 +6487,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -6495,7 +6495,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -6503,7 +6503,7 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_InvoiceID)
@@ -6511,33 +6511,33 @@ namespace Ibasa.Ripple
                 InvoiceID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Amount_SendMax)
             {
                 SendMax = reader.ReadAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Amount_DeliverMin)
@@ -6545,38 +6545,38 @@ namespace Ibasa.Ripple
                 DeliverMin = reader.ReadAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -6599,7 +6599,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -6621,7 +6621,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -6783,7 +6783,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -6791,24 +6791,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -6816,7 +6816,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -6824,24 +6824,24 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_Channel)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_Channel, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.Hash256_Channel, fieldId));
             }
             Channel = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Amount_Amount)
             {
                 Amount = reader.ReadXrpAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Amount_Balance)
@@ -6849,41 +6849,41 @@ namespace Ibasa.Ripple
                 Balance = reader.ReadXrpAmount();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_PublicKey)
             {
                 PublicKey = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Blob_Signature)
@@ -6891,12 +6891,12 @@ namespace Ibasa.Ripple
                 Signature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelClaimTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -6919,7 +6919,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -6937,7 +6937,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelClaimTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -7093,7 +7093,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -7101,24 +7101,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_DestinationTag)
             {
                 DestinationTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -7126,7 +7126,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_CancelAfter)
@@ -7134,24 +7134,24 @@ namespace Ibasa.Ripple
                 CancelAfter = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_SettleDelay)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_SettleDelay, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_SettleDelay, fieldId));
             }
             SettleDelay = TimeSpan.FromSeconds(reader.ReadUInt32());
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
             {
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -7159,65 +7159,65 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_PublicKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_PublicKey, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Blob_PublicKey, fieldId));
             }
             PublicKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.AccountID_Destination)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Destination, fieldId));
             }
             Destination = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -7240,7 +7240,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -7258,7 +7258,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelCreateTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -7385,7 +7385,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -7393,24 +7393,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_Expiration)
             {
                 Expiration = Epoch.ToDateTimeOffset(reader.ReadUInt32());
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -7418,7 +7418,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -7426,7 +7426,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -7434,56 +7434,56 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Hash256_Channel)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_Channel, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Hash256_Channel, fieldId));
             }
             Channel = reader.ReadHash256();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Amount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Amount_Amount, fieldId));
             }
             Amount = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read PaymentChannelFundTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -7506,7 +7506,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -7524,7 +7524,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read PaymentChannelFundTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -7633,7 +7633,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -7641,24 +7641,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -7666,7 +7666,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -7674,38 +7674,38 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SetRegularKeyTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -7736,7 +7736,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -7754,7 +7754,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read SetRegularKeyTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -7870,7 +7870,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -7878,41 +7878,41 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_SignerQuorum)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_SignerQuorum, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.UInt32_SignerQuorum, fieldId));
             }
             SignerQuorum = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
             {
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -7920,43 +7920,43 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Array_Signers)
             {
@@ -7968,13 +7968,13 @@ namespace Ibasa.Ripple
                     {
                         if (!reader.TryReadFieldId(out fieldId))
                         {
-                            throw new Exception("End of st data reached but non-optional fields still not set");
+                            throw new Exception("Could not read SignerListSetTransaction, end of st data reached but non-optional fields still not set");
                         }
                         break;
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -7982,7 +7982,7 @@ namespace Ibasa.Ripple
             }
             if (fieldId != StFieldId.Array_SignerEntries)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Array_SignerEntries, fieldId));
+                throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Array_SignerEntries, fieldId));
             }
             var SignerEntriesList = new System.Collections.Generic.List<SignerEntry>();
             while (true)
@@ -7998,7 +7998,7 @@ namespace Ibasa.Ripple
                 }
                 if (fieldId != StFieldId.Object_SignerEntry)
                 {
-                    throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_SignerEntry, fieldId));
+                    throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Object_SignerEntry, fieldId));
                 }
                 SignerEntriesList.Add(new SignerEntry(ref reader));
             }
@@ -8015,7 +8015,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read SignerListSetTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -8121,7 +8121,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -8129,41 +8129,41 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
             {
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_TicketCount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_TicketCount, fieldId));
+                throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.UInt32_TicketCount, fieldId));
             }
             TicketCount = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
             {
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -8171,38 +8171,38 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TicketCreateTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -8225,7 +8225,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -8243,7 +8243,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read TicketCreateTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }
@@ -8362,7 +8362,7 @@ namespace Ibasa.Ripple
                 base.Flags = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_SourceTag)
@@ -8370,24 +8370,24 @@ namespace Ibasa.Ripple
                 SourceTag = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.UInt32_Sequence)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
+                throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.UInt32_Sequence, fieldId));
             }
             Sequence = reader.ReadUInt32();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.UInt32_QualityIn)
             {
                 QualityIn = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_QualityOut)
@@ -8395,7 +8395,7 @@ namespace Ibasa.Ripple
                 QualityOut = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_LastLedgerSequence)
@@ -8403,7 +8403,7 @@ namespace Ibasa.Ripple
                 LastLedgerSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.UInt32_TicketSequence)
@@ -8411,7 +8411,7 @@ namespace Ibasa.Ripple
                 TicketSequence = reader.ReadUInt32();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId == StFieldId.Hash256_AccountTxnID)
@@ -8419,47 +8419,47 @@ namespace Ibasa.Ripple
                 AccountTxnID = reader.ReadHash256();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.Amount_LimitAmount)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_LimitAmount, fieldId));
+                throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.Amount_LimitAmount, fieldId));
             }
             LimitAmount = reader.ReadIssuedAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Amount_Fee)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
+                throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.Amount_Fee, fieldId));
             }
             Fee = reader.ReadXrpAmount();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId != StFieldId.Blob_SigningPubKey)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
+                throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.Blob_SigningPubKey, fieldId));
             }
             SigningPubKey = reader.ReadBlob();
             if (!reader.TryReadFieldId(out fieldId))
             {
-                throw new Exception("End of st data reached but non-optional fields still not set");
+                throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
             }
             if (fieldId == StFieldId.Blob_TxnSignature)
             {
                 TxnSignature = reader.ReadBlob();
                 if (!reader.TryReadFieldId(out fieldId))
                 {
-                    throw new Exception("End of st data reached but non-optional fields still not set");
+                    throw new Exception("Could not read TrustSetTransaction, end of st data reached but non-optional fields still not set");
                 }
             }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             if (!reader.TryReadFieldId(out fieldId))
@@ -8482,7 +8482,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Signer)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
+                        throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.Object_Signer, fieldId));
                     }
                     SignersList.Add(new Signer(ref reader));
                 }
@@ -8500,7 +8500,7 @@ namespace Ibasa.Ripple
                     }
                     if (fieldId != StFieldId.Object_Memo)
                     {
-                        throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
+                        throw new Exception(string.Format("Could not read TrustSetTransaction, expected {0} but got {1}", StFieldId.Object_Memo, fieldId));
                     }
                     MemosList.Add(new Memo(ref reader));
                 }

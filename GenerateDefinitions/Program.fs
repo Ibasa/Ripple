@@ -1070,7 +1070,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                     writer.WriteLine("{0}{{", spacer)
                     // If we couldn't find another field id but there are still non-optional fields then throw, else just early return
                     if sortedFields |> Seq.skip (i + 1) |> Seq.exists (fun field -> not field.Optional) then
-                        writer.WriteLine("{0}    throw new Exception(\"End of st data reached but non-optional fields still not set\");", spacer)
+                        writer.WriteLine("{0}    throw new Exception(\"Could not read {1}, end of st data reached but non-optional fields still not set\");", spacer, ledgerTypeClassName)
                     else
                         writer.WriteLine("{0}    return;", spacer)
                     writer.WriteLine("{0}}}", spacer)
@@ -1089,7 +1089,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 writer.WriteLine("{0}    }}", spacer)
                 writer.WriteLine("{0}    if (fieldId != StFieldId.Object_{1})", spacer, inner)
                 writer.WriteLine("{0}    {{", spacer)
-                writer.WriteLine("{0}        throw new Exception(string.Format(\"Expected {{0}} but got {{1}}\", StFieldId.Object_{1}, fieldId));", spacer, inner)
+                writer.WriteLine("{0}        throw new Exception(string.Format(\"Could not read {1}, expected {{0}} but got {{1}}\", StFieldId.Object_{2}, fieldId));", spacer, ledgerTypeClassName, inner)
                 writer.WriteLine("{0}    }}", spacer)
 
 
@@ -1120,7 +1120,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
             else
                 writer.WriteLine("            if (fieldId != {0})", fieldId)
                 writer.WriteLine("            {")
-                writer.WriteLine("                throw new Exception(string.Format(\"Expected {{0}} but got {{1}}\", {0}, fieldId));", fieldId)
+                writer.WriteLine("                throw new Exception(string.Format(\"Could not read {0}, expected {{0}} but got {{1}}\", {1}, fieldId));", ledgerTypeClassName, fieldId)
                 writer.WriteLine("            }")
                 if field.Type = "Vector256" then
                     writer.WriteLine("            {0} = Array.AsReadOnly({1});", fieldName, readStField field)
