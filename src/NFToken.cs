@@ -37,7 +37,7 @@ namespace Ibasa.Ripple
             var fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.Hash256_NFTokenID)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_NFTokenID, fieldId));
+                throw new Exception(string.Format("Could not read NFToken, expected {0} but got {1}", StFieldId.Hash256_NFTokenID, fieldId));
             }
             NFTokenID = reader.ReadHash256();
             fieldId = reader.ReadFieldId();
@@ -52,7 +52,7 @@ namespace Ibasa.Ripple
             }
             if (fieldId != StFieldId.Object_ObjectEndMarker)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
+                throw new Exception(string.Format("Could not read NFToken, expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
             }
         }
 

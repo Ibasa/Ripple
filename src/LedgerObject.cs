@@ -360,19 +360,27 @@ namespace Ibasa.Ripple
             var fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt16_SignerWeight)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt16_SignerWeight, fieldId));
+                throw new Exception(string.Format("Could not read SignerEntry, expected {0} but got {1}", StFieldId.UInt16_SignerWeight, fieldId));
             }
             SignerWeight = reader.ReadUInt16();
             fieldId = reader.ReadFieldId();
+            if (fieldId == StFieldId.Hash256_WalletLocator)
+            {
+                var _ = reader.ReadHash256();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("Could not read SignerEntry, end of st data reached but non-optional fields still not set");
+                }
+            }
             if (fieldId != StFieldId.AccountID_Account)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
+                throw new Exception(string.Format("Could not read SignerEntry, expected {0} but got {1}", StFieldId.AccountID_Account, fieldId));
             }
             Account = reader.ReadAccount();
             fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.Object_ObjectEndMarker)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
+                throw new Exception(string.Format("Could not read SignerEntry, expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
             }
         }
 
@@ -495,19 +503,19 @@ namespace Ibasa.Ripple
             var fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.UInt32_CloseTime)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.UInt32_CloseTime, fieldId));
+                throw new Exception(string.Format("Could not read Majority, expected {0} but got {1}", StFieldId.UInt32_CloseTime, fieldId));
             }
             CloseTime = Epoch.ToDateTimeOffset(reader.ReadUInt32());
             fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.Hash256_Amendment)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Hash256_Amendment, fieldId));
+                throw new Exception(string.Format("Could not read Majority, expected {0} but got {1}", StFieldId.Hash256_Amendment, fieldId));
             }
             Amendment = reader.ReadHash256();
             fieldId = reader.ReadFieldId();
             if (fieldId != StFieldId.Object_ObjectEndMarker)
             {
-                throw new Exception(string.Format("Expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
+                throw new Exception(string.Format("Could not read Majority, expected {0} but got {1}", StFieldId.Object_ObjectEndMarker, fieldId));
             }
         }
 
