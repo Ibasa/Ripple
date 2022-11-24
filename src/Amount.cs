@@ -186,6 +186,10 @@ namespace Ibasa.Ripple
         public static ulong ToUInt64Bits(XrpAmount value)
         {
             var bits = (ulong)Math.Abs(value.Drops);
+            if (value.Drops >= 0)
+            {
+                bits |= 0x4000_0000_0000_0000;
+            }
             return bits;
         }
 
