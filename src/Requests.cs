@@ -1874,7 +1874,7 @@ namespace Ibasa.Ripple
                 else
                 {
                     // Drops
-                    OwnerFunds = XrpAmount.FromDrops(ulong.Parse(ownerFunds.ToString()));
+                    OwnerFunds = XrpAmount.FromDrops(long.Parse(ownerFunds.ToString()));
                 }
             }
         }
@@ -2266,8 +2266,8 @@ namespace Ibasa.Ripple
             JsonElement element;
             Account = new AccountId(json.GetProperty("account").GetString());
             DestinationAccount = new AccountId(json.GetProperty("destination_account").GetString());
-            Amount = XrpAmount.FromDrops(ulong.Parse(json.GetProperty("amount").GetString()));
-            Balance = XrpAmount.FromDrops(ulong.Parse(json.GetProperty("balance").GetString()));
+            Amount = XrpAmount.FromDrops(long.Parse(json.GetProperty("amount").GetString()));
+            Balance = XrpAmount.FromDrops(long.Parse(json.GetProperty("balance").GetString()));
             ChannelId = new Hash256(json.GetProperty("channel_id").GetString());
             SettleDelay = TimeSpan.FromSeconds(json.GetProperty("settle_delay").GetUInt32());
             if (json.TryGetProperty("public_key_hex", out element))

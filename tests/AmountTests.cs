@@ -7,17 +7,28 @@ namespace Ibasa.Ripple.Tests
     public class XrpAmountTests
     {
         [Theory]
-        [InlineData(0ul, "0 XRP")]
-        [InlineData(1ul, "0.000001 XRP")]
-        [InlineData(1_000ul, "0.001 XRP")]
-        [InlineData(1_000_000ul, "1 XRP")]
-        [InlineData(1_000_000_000ul, "1000 XRP")]
-        [InlineData(1_000_000_000_000ul, "1000000 XRP")]
-        [InlineData(100_000_000_000_000_000ul, "100000000000 XRP")]
-        public void TestToString(ulong drops, string expected)
+        [InlineData(0L, "0 XRP")]
+        [InlineData(1L, "0.000001 XRP")]
+        [InlineData(1_000L, "0.001 XRP")]
+        [InlineData(1_000_000L, "1 XRP")]
+        [InlineData(1_000_000_000L, "1000 XRP")]
+        [InlineData(1_000_000_000_000L, "1000000 XRP")]
+        [InlineData(100_000_000_000_000_000L, "100000000000 XRP")]
+        [InlineData(4_611_686_018_427_387_903L, "4611686018427.387903 XRP")]
+        public void TestToString(long drops, string expected)
         {
             var amount = XrpAmount.FromDrops(drops);
             Assert.Equal(expected, amount.ToString());
+        }
+
+        [Theory]
+        [InlineData(4_611_686_018_427_387_904L)]
+        [InlineData(-4_611_686_018_427_387_904L)]
+        public void TestOverflow(long drops)
+        {
+            var exc = Assert.Throws<ArgumentOutOfRangeException>(() => 
+                XrpAmount.FromDrops(drops));
+            Assert.Contains("absolute value of drops must be less than or equal to 4611686018427387903", exc.Message);
         }
     }
 

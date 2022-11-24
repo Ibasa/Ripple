@@ -41,7 +41,8 @@ namespace Ibasa.Ripple
                                     if (responses.TryGetValue(id, out var task))
                                     {
                                         responses.Remove(id);
-                                        task.SetResult(json.RootElement.GetProperty("result").Clone());
+                                        var clone = json.RootElement.GetProperty("result").Clone();
+                                        task.SetResult(clone);
                                     }
                                 }
                             }
@@ -88,7 +89,7 @@ namespace Ibasa.Ripple
                             {
                                 OnPathFind?.Invoke(this, id, pathFindResponse);
                             }
-                            catch (Exception exc)
+                            catch (Exception)
                             {
                                 // TODO: We don't want user exceptions from the OnPathFind event to tear down this thread but we should bubble them up somehow.
                             }

@@ -42,7 +42,7 @@ namespace Ibasa.Ripple
     public struct LedgerSpecification : IEquatable<LedgerSpecification>
     {
         private uint index;
-        private string shortcut;
+        private string? shortcut;
         private Hash256? hash;
 
         /// <summary>

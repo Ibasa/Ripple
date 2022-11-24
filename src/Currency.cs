@@ -401,8 +401,13 @@ namespace Ibasa.Ripple
             return value.bits | 0x8000_0000_0000_0000;
         }
 
-        public static Currency FromUInt64Bits(ulong value)
+        public static Currency? FromUInt64Bits(ulong value)
         {
+            if ((value & 0x8000_0000_0000_0000) == 0)
+            {
+                return null;
+            }
+
             return new Currency(value & ~0x8000_0000_0000_0000);
         }
 

@@ -464,7 +464,7 @@ namespace Ibasa.Ripple.Tests
             var accountTwo = Setup.TestAccountTwo.Address;
             var secret = Setup.TestAccountOne.Secret;
 
-            ulong startingDrops;
+            long startingDrops;
             {
                 var response = await Api.AccountInfo(new AccountInfoRequest()
                 {
@@ -484,7 +484,7 @@ namespace Ibasa.Ripple.Tests
             var pr = Assert.IsType<PaymentTransaction>(transactionResponse.Transaction);
             Assert.Equal(transaction.Amount, pr.Amount);
 
-            ulong endingDrops;
+            long endingDrops;
             {
                 var response = await Api.AccountInfo(new AccountInfoRequest()
                 {
@@ -494,7 +494,7 @@ namespace Ibasa.Ripple.Tests
                 endingDrops = response.AccountData.Balance.Drops;
             }
 
-            Assert.Equal(100ul, endingDrops - startingDrops);
+            Assert.Equal(100L, endingDrops - startingDrops);
         }
 
         [Fact]
@@ -748,7 +748,7 @@ namespace Ibasa.Ripple.Tests
 
             var accountOne = Setup.TestAccountOne;
 
-            ulong startingDrops;
+            long startingDrops;
             {
                 var response = await Api.AccountInfo(new AccountInfoRequest()
                 {
@@ -780,7 +780,7 @@ namespace Ibasa.Ripple.Tests
             Assert.Equal(transaction.Destination, adr.Destination);
             Assert.Equal(transaction.DestinationTag, adr.DestinationTag);
 
-            ulong endingDrops;
+            long endingDrops;
             {
                 var response = await Api.AccountInfo(new AccountInfoRequest()
                 {
@@ -884,7 +884,7 @@ namespace Ibasa.Ripple.Tests
                 Account = accounts[0].Address,
             });
 
-            Assert.Equal(100_000_000ul, accountInfoResponse.AccountData.Balance.Drops);
+            Assert.Equal(100_000_000L, accountInfoResponse.AccountData.Balance.Drops);
         }
 
         [Fact]

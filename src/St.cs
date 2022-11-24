@@ -161,7 +161,7 @@ namespace Ibasa.Ripple.St
         public void WriteAmount(StAmountFieldCode fieldCode, XrpAmount value)
         {
             WriteFieldId(StTypeCode.Amount, (uint)fieldCode);
-            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(bufferWriter.GetSpan(8), value.Drops | 0x4000000000000000);
+            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(bufferWriter.GetSpan(8), XrpAmount.ToUInt64Bits(value));
             bufferWriter.Advance(8);
         }
 
@@ -549,11 +549,11 @@ namespace Ibasa.Ripple.St
             }
 
             var amount = System.Buffers.Binary.BinaryPrimitives.ReadUInt64BigEndian(data.Slice(ConsumedBytes, 8));
-            if ((amount & 0x8000000000000000) == 0)
+            var xrp = XrpAmount.FromUInt64Bits(amount);
+            if (xrp.HasValue)
             {
-                // XRP
-                value = new Amount(amount & ~0x4000000000000000u);
                 ConsumedBytes += 8;
+                value = new Amount(xrp.Value.Drops);
                 return true;
             }
             else
@@ -565,9 +565,10 @@ namespace Ibasa.Ripple.St
                 }
 
                 var currency = Currency.FromUInt64Bits(amount);
+                System.Diagnostics.Debug.Assert(currency.HasValue);
                 var code = new CurrencyCode(data.Slice(ConsumedBytes + 8, 20));
                 var issuer = new AccountId(data.Slice(ConsumedBytes + 28, 20));
-                value = new Amount(issuer, code, currency);
+                value = new Amount(issuer, code, currency.Value);
                 ConsumedBytes += 48;
                 return true;
             }

@@ -1,77 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
 
 namespace Ibasa.Ripple
 {
-    /// <summary>
-    /// The "CurrencyType" type is a special field type that represents an issued currency with a code and optionally an issuer or XRP.
-    /// </summary>
-    public struct CurrencyType
-    {
-        public readonly AccountId? Issuer;
-        public readonly CurrencyCode CurrencyCode;
-
-        public static readonly CurrencyType XRP = new CurrencyType();
-
-        public CurrencyType(CurrencyCode currencyCode)
-        {
-            CurrencyCode = currencyCode;
-            Issuer = null;
-        }
-
-        public CurrencyType(AccountId issuer, CurrencyCode currencyCode)
-        {
-            if (currencyCode == CurrencyCode.XRP)
-            {
-                throw new ArgumentException("Can not be XRP", "currencyCode");
-            }
-            CurrencyCode = currencyCode;
-            Issuer = issuer;
-        }
-
-        internal void WriteJson(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WriteString("currency", CurrencyCode.ToString());
-            if (Issuer.HasValue)
-            {
-                writer.WriteString("issuer", Issuer.Value.ToString());
-            }
-            writer.WriteEndObject();
-        }
-
-        internal static CurrencyType ReadJson(JsonElement json)
-        {
-            var currencyCode = new CurrencyCode(json.GetProperty("currency").GetString());
-
-            if (json.TryGetProperty("issuer", out var element))
-            {
-                return new CurrencyType(new AccountId(element.GetString()), currencyCode);
-            }
-            else
-            {
-                return new CurrencyType(currencyCode);
-            }
-        }
-
-        public override string ToString()
-        {
-            if (Issuer.HasValue)
-            {
-                return string.Format("{1}({2})", CurrencyCode, Issuer.Value);
-            }
-            else
-            {
-                return CurrencyCode.ToString();
-            }
-        }
-
-        public static implicit operator CurrencyType(CurrencyCode value)
-        {
-            return new CurrencyType(value);
-        }
-    }
-
     /// <summary>
     /// The "Amount" type is a special field type that represents an amount of currency, either XRP or an issued currency.
     /// </summary>
@@ -85,12 +17,7 @@ namespace Ibasa.Ripple
         {
             get
             {
-                if ((value & 0x8000_0000_0000_0000) == 0)
-                {
-                    // XRP just return the positive drops
-                    return Ripple.XrpAmount.FromDrops(value & 0x3FFFFFFFFFFFFFFF);
-                }
-                return null;
+                return Ripple.XrpAmount.FromUInt64Bits(value);
             }
         }
 
@@ -98,21 +25,26 @@ namespace Ibasa.Ripple
         {
             get
             {
-                if ((value & 0x8000_0000_0000_0000) != 0)
+                var currency = Currency.FromUInt64Bits(value);
+                if (currency.HasValue)
                 {
-                    return new IssuedAmount(issuer, currencyCode, Currency.FromUInt64Bits(value));
+                    return new IssuedAmount(issuer, currencyCode, currency.Value);
                 }
                 return null;
             }
         }
 
-        public Amount(ulong drops)
+        public Amount(long drops)
         {
-            if (drops > 100000000000000000)
+            if (drops < -0x3FFF_FFFF_FFFF_FFFF || drops > 0x3FFF_FFFF_FFFF_FFFF)
             {
-                throw new ArgumentOutOfRangeException("drops", drops, "drops must be less than or equal to 100,000,000,000,000,000");
+                throw new ArgumentOutOfRangeException("drops", drops, string.Format("absolute value of drops must be less than or equal to {0}", 0x3FFF_FFFF_FFFF_FFFF));
             }
-            this.value = drops | 0x4000_0000_0000_0000;
+            this.value = (ulong)Math.Abs(drops);
+            if (drops >= 0) 
+            {
+                this.value |= 0x4000_0000_0000_0000;
+            }
             // These fields are only used for IssuedAmount but struct constructor has to set all fields.
             this.currencyCode = default;
             this.issuer = default;
@@ -189,7 +121,7 @@ namespace Ibasa.Ripple
     /// </summary>
     public readonly struct XrpAmount
     {
-        public readonly ulong Drops;
+        public readonly long Drops;
 
         public decimal XRP
         {
@@ -199,32 +131,29 @@ namespace Ibasa.Ripple
             }
         }
 
-        private XrpAmount(ulong drops)
+        private XrpAmount(long drops)
         {
-            if (drops > 100000000000000000)
+            if (drops < -0x3FFF_FFFF_FFFF_FFFF || drops > 0x3FFF_FFFF_FFFF_FFFF)
             {
-                throw new ArgumentOutOfRangeException("drops", drops, "drops must be less than or equal to 100,000,000,000,000,000");
+                throw new ArgumentOutOfRangeException("drops", drops, string.Format("absolute value of drops must be less than or equal to {0}", 0x3FFF_FFFF_FFFF_FFFF));
             }
             Drops = drops;
         }
 
-        public static XrpAmount FromDrops(ulong drops)
+        public static XrpAmount FromDrops(long drops)
         {
             return new XrpAmount(drops);
         }
 
         public static XrpAmount FromXrp(decimal xrp)
         {
-            if (xrp < 0)
+            // 1000000 drops per xrp, at most 3FFF_FFFF_FFFF_FFFF drops (2^63-1)
+            // 4611686018427387903 / 1000000 = 4611686018427
+            if (Math.Abs(xrp) > 4611686018427)
             {
-                throw new ArgumentOutOfRangeException("xrp", xrp, "xrp must be positive");
+                throw new ArgumentOutOfRangeException("xrp", xrp, string.Format("absolute value of xrp must be less than or equal to {0}", 4611686018427));
             }
-            if (xrp > 100000000000)
-            {
-                throw new ArgumentOutOfRangeException("xrp", xrp, "xrp must be less than or equal to 100,000,000,000");
-            }
-
-            return new XrpAmount((ulong)(xrp * 1000000));
+            return new XrpAmount((long)(xrp * 1000000));
         }
 
         public static implicit operator Amount(XrpAmount value)
@@ -241,11 +170,11 @@ namespace Ibasa.Ripple
         {
             if (json.ValueKind == JsonValueKind.String)
             {
-                return new XrpAmount(ulong.Parse(json.GetString()));
+                return new XrpAmount(long.Parse(json.GetString()));
             }
             else if (json.ValueKind == JsonValueKind.Number)
             {
-                return new XrpAmount(json.GetUInt64());
+                return new XrpAmount(json.GetInt64());
             }
             else
             {
@@ -254,9 +183,30 @@ namespace Ibasa.Ripple
             }
         }
 
+        public static ulong ToUInt64Bits(XrpAmount value)
+        {
+            var bits = (ulong)Math.Abs(value.Drops);
+            return bits;
+        }
+
+        public static XrpAmount? FromUInt64Bits(ulong value)
+        {
+            if ((value & 0x8000_0000_0000_0000) != 0)
+            {
+                return null;
+            }
+
+            var drops = (long)(value & 0x3FFF_FFFF_FFFF_FFFF);
+            if ((value & 0x4000_0000_0000_0000) == 0)
+            {
+                drops = -drops;
+            }
+            return FromDrops(drops);
+        }
+
         public static XrpAmount Parse(string s)
         {
-            return new XrpAmount(ulong.Parse(s));
+            return new XrpAmount(long.Parse(s));
         }
 
         public override string ToString()

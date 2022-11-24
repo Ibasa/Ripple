@@ -710,7 +710,7 @@ namespace Ibasa.Ripple
             Span<byte> buffer = stackalloc byte[44];
             System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(buffer, hpCLM);
             channelId.CopyTo(buffer.Slice(4));
-            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(buffer.Slice(36), amount.Drops);
+            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(buffer.Slice(36), XrpAmount.ToUInt64Bits(amount));
             return keyPair.Sign(buffer);
         }
 
@@ -719,7 +719,7 @@ namespace Ibasa.Ripple
             Span<byte> buffer = stackalloc byte[44];
             System.Buffers.Binary.BinaryPrimitives.WriteUInt32BigEndian(buffer, hpCLM);
             channelId.CopyTo(buffer.Slice(4));
-            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(buffer.Slice(36), amount.Drops);
+            System.Buffers.Binary.BinaryPrimitives.WriteUInt64BigEndian(buffer.Slice(36), XrpAmount.ToUInt64Bits(amount));
             return publicKey.Verify(buffer, signature);
         }
     }
