@@ -12,7 +12,6 @@ namespace Ibasa.Ripple.St
     /// </summary>
     public enum StTransactionType : ushort
     {
-        Invalid = 65535,
         Payment = 0,
         EscrowCreate = 1,
         EscrowFinish = 2,
@@ -44,6 +43,7 @@ namespace Ibasa.Ripple.St
         EnableAmendment = 100,
         SetFee = 101,
         UNLModify = 102,
+        Invalid = 65535,
     }
 
     /// <summary>
@@ -52,28 +52,28 @@ namespace Ibasa.Ripple.St
     /// </summary>
     public enum StLedgerEntryType
     {
+        Any = -3,
+        Child = -2,
         Invalid = -1,
-        AccountRoot = 97,
-        DirectoryNode = 100,
-        RippleState = 114,
-        Ticket = 84,
+        NFTokenOffer = 55,
+        Check = 67,
+        NegativeUNL = 78,
+        NFTokenPage = 80,
         SignerList = 83,
-        Offer = 111,
-        LedgerHashes = 104,
+        Ticket = 84,
+        AccountRoot = 97,
+        Contract = 99,
+        DirectoryNode = 100,
         Amendments = 102,
+        GeneratorMap = 103,
+        LedgerHashes = 104,
+        Nickname = 110,
+        Offer = 111,
+        DepositPreauth = 112,
+        RippleState = 114,
         FeeSettings = 115,
         Escrow = 117,
         PayChannel = 120,
-        Check = 67,
-        DepositPreauth = 112,
-        NegativeUNL = 78,
-        NFTokenPage = 80,
-        NFTokenOffer = 55,
-        Any = -3,
-        Child = -2,
-        Nickname = 110,
-        Contract = 99,
-        GeneratorMap = 103,
     }
 
     /// <summary>
@@ -114,82 +114,82 @@ namespace Ibasa.Ripple.St
     public enum StAccountIDFieldCode
     {
         Account = 1,
-        Authorize = 5,
+        Owner = 2,
         Destination = 3,
+        Issuer = 4,
+        Authorize = 5,
+        Unauthorize = 6,
+        RegularKey = 8,
+        NFTokenMinter = 9,
         EmitCallback = 10,
         HookAccount = 16,
-        Issuer = 4,
-        NFTokenMinter = 9,
-        Owner = 2,
-        RegularKey = 8,
-        Unauthorize = 6,
     }
 
     public enum StAmountFieldCode
     {
         Amount = 1,
         Balance = 2,
-        DeliverMin = 10,
-        DeliveredAmount = 18,
-        Fee = 8,
-        HighLimit = 7,
         LimitAmount = 3,
-        LowLimit = 6,
-        MinimumOffer = 16,
-        NFTokenBrokerFee = 19,
-        RippleEscrow = 17,
-        SendMax = 9,
-        TakerGets = 5,
         TakerPays = 4,
+        TakerGets = 5,
+        LowLimit = 6,
+        HighLimit = 7,
+        Fee = 8,
+        SendMax = 9,
+        DeliverMin = 10,
+        MinimumOffer = 16,
+        RippleEscrow = 17,
+        DeliveredAmount = 18,
+        NFTokenBrokerFee = 19,
         taker_gets_funded = 258,
         taker_pays_funded = 259,
     }
 
     public enum StArrayFieldCode
     {
-        AffectedNodes = 8,
         ArrayEndMarker = 1,
-        DisabledValidators = 17,
-        HookExecutions = 18,
-        HookGrants = 20,
-        HookParameters = 19,
-        Hooks = 11,
-        Majorities = 16,
+        Signers = 3,
+        SignerEntries = 4,
+        Template = 5,
+        Necessary = 6,
+        Sufficient = 7,
+        AffectedNodes = 8,
         Memos = 9,
         NFTokens = 10,
-        Necessary = 6,
-        SignerEntries = 4,
-        Signers = 3,
-        Sufficient = 7,
-        Template = 5,
+        Hooks = 11,
+        Majorities = 16,
+        DisabledValidators = 17,
+        HookExecutions = 18,
+        HookParameters = 19,
+        HookGrants = 20,
     }
 
     public enum StBlobFieldCode
     {
-        Condition = 17,
-        CreateCode = 11,
-        Domain = 7,
-        ExpireCode = 10,
-        Fulfillment = 16,
-        FundCode = 8,
-        HookParameterName = 24,
-        HookParameterValue = 25,
-        HookReturnString = 23,
-        HookStateData = 22,
-        MasterSignature = 18,
-        MemoData = 13,
-        MemoFormat = 14,
-        MemoType = 12,
-        MessageKey = 2,
         PublicKey = 1,
-        RemoveCode = 9,
-        Signature = 6,
+        MessageKey = 2,
         SigningPubKey = 3,
         TxnSignature = 4,
-        UNLModifyValidator = 19,
         URI = 5,
+        Signature = 6,
+        Domain = 7,
+        FundCode = 8,
+        RemoveCode = 9,
+        ExpireCode = 10,
+        CreateCode = 11,
+        MemoType = 12,
+        MemoData = 13,
+        MemoFormat = 14,
+        Fulfillment = 16,
+        Condition = 17,
+        MasterSignature = 18,
+        UNLModifyValidator = 19,
         ValidatorToDisable = 20,
         ValidatorToReEnable = 21,
+        HookStateData = 22,
+        HookReturnString = 23,
+        HookParameterName = 24,
+        HookParameterValue = 25,
     }
 
     public enum StHash128FieldCode
@@ -199,44 +199,44 @@ namespace Ibasa.Ripple.St
 
     public enum StHash160FieldCode
     {
-        TakerGetsCurrency = 3,
-        TakerGetsIssuer = 4,
         TakerPaysCurrency = 1,
         TakerPaysIssuer = 2,
+        TakerGetsCurrency = 3,
+        TakerGetsIssuer = 4,
     }
 
     public enum StHash256FieldCode
     {
+        LedgerHash = 1,
+        ParentHash = 2,
+        TransactionHash = 3,
         AccountHash = 4,
+        PreviousTxnID = 5,
+        LedgerIndex = 6,
+        WalletLocator = 7,
+        RootIndex = 8,
         AccountTxnID = 9,
-        Amendment = 19,
-        BookDirectory = 16,
-        Channel = 22,
-        CheckID = 24,
-        ConsensusHash = 23,
-        Digest = 21,
-        EmitHookHash = 13,
-        EmitNonce = 12,
+        NFTokenID = 10,
         EmitParentTxnID = 11,
+        EmitNonce = 12,
+        EmitHookHash = 13,
+        BookDirectory = 16,
+        InvoiceID = 17,
+        Nickname = 18,
+        Amendment = 19,
+        Digest = 21,
+        Channel = 22,
+        ConsensusHash = 23,
+        CheckID = 24,
+        ValidatedHash = 25,
+        PreviousPageMin = 26,
+        NextPageMin = 27,
+        NFTokenBuyOffer = 28,
+        NFTokenSellOffer = 29,
+        HookStateKey = 30,
         HookHash = 31,
         HookNamespace = 32,
         HookSetTxnID = 33,
-        HookStateKey = 30,
-        InvoiceID = 17,
-        LedgerHash = 1,
-        LedgerIndex = 6,
-        NFTokenBuyOffer = 28,
-        NFTokenID = 10,
-        NFTokenSellOffer = 29,
-        NextPageMin = 27,
-        Nickname = 18,
-        ParentHash = 2,
-        PreviousPageMin = 26,
-        PreviousTxnID = 5,
-        RootIndex = 8,
-        TransactionHash = 3,
-        ValidatedHash = 25,
-        WalletLocator = 7,
         hash = 257,
         index = 258,
     }
@@ -253,28 +253,28 @@ namespace Ibasa.Ripple.St
 
     public enum StObjectFieldCode
     {
+        ObjectEndMarker = 1,
+        TransactionMetaData = 2,
         CreatedNode = 3,
         DeletedNode = 4,
-        DisabledValidator = 19,
-        EmitDetails = 13,
-        EmittedTxn = 20,
-        FinalFields = 7,
-        Hook = 14,
-        HookDefinition = 22,
-        HookExecution = 21,
-        HookGrant = 24,
-        HookParameter = 23,
-        Majority = 18,
-        Memo = 10,
         ModifiedNode = 5,
-        NFToken = 12,
-        NewFields = 8,
-        ObjectEndMarker = 1,
         PreviousFields = 6,
-        Signer = 16,
-        SignerEntry = 11,
+        FinalFields = 7,
+        NewFields = 8,
         TemplateEntry = 9,
-        TransactionMetaData = 2,
+        Memo = 10,
+        SignerEntry = 11,
+        NFToken = 12,
+        EmitDetails = 13,
+        Hook = 14,
+        Signer = 16,
+        Majority = 18,
+        DisabledValidator = 19,
+        EmittedTxn = 20,
+        HookExecution = 21,
+        HookDefinition = 22,
+        HookParameter = 23,
+        HookGrant = 24,
     }
 
     public enum StPathSetFieldCode
@@ -289,100 +289,100 @@ namespace Ibasa.Ripple.St
 
     public enum StUInt16FieldCode
     {
-        HookApiVersion = 20,
-        HookEmitCount = 18,
-        HookExecutionIndex = 19,
-        HookStateChangeCount = 17,
         LedgerEntryType = 1,
-        SignerWeight = 3,
         TransactionType = 2,
+        SignerWeight = 3,
         TransferFee = 4,
         Version = 16,
+        HookStateChangeCount = 17,
+        HookEmitCount = 18,
+        HookExecutionIndex = 19,
+        HookApiVersion = 20,
     }
 
     public enum StUInt32FieldCode
     {
-        BondAmount = 23,
-        BurnedNFTokens = 44,
-        CancelAfter = 36,
-        ClearFlag = 34,
-        CloseTime = 7,
-        DestinationTag = 14,
-        EmitGeneration = 46,
-        Expiration = 10,
-        FinishAfter = 37,
-        FirstLedgerSequence = 26,
         Flags = 2,
+        SourceTag = 3,
+        Sequence = 4,
+        PreviousTxnLgrSeq = 5,
+        LedgerSequence = 6,
+        CloseTime = 7,
+        ParentCloseTime = 8,
+        SigningTime = 9,
+        Expiration = 10,
+        TransferRate = 11,
+        WalletSize = 12,
+        OwnerCount = 13,
+        DestinationTag = 14,
         HighQualityIn = 16,
         HighQualityOut = 17,
-        HookStateCount = 45,
-        LastLedgerSequence = 27,
-        LedgerSequence = 6,
-        LoadFee = 24,
         LowQualityIn = 18,
         LowQualityOut = 19,
-        MintedNFTokens = 43,
-        NFTokenTaxon = 42,
-        OfferSequence = 25,
-        OperationLimit = 29,
-        OwnerCount = 13,
-        ParentCloseTime = 8,
-        PreviousTxnLgrSeq = 5,
         QualityIn = 20,
         QualityOut = 21,
+        StampEscrow = 22,
+        BondAmount = 23,
+        LoadFee = 24,
+        OfferSequence = 25,
+        FirstLedgerSequence = 26,
+        LastLedgerSequence = 27,
+        TransactionIndex = 28,
+        OperationLimit = 29,
         ReferenceFeeUnits = 30,
         ReserveBase = 31,
         ReserveIncrement = 32,
-        Sequence = 4,
         SetFlag = 33,
-        SettleDelay = 39,
-        SignerListID = 38,
+        ClearFlag = 34,
         SignerQuorum = 35,
-        SigningTime = 9,
-        SourceTag = 3,
-        StampEscrow = 22,
+        CancelAfter = 36,
+        FinishAfter = 37,
+        SignerListID = 38,
+        SettleDelay = 39,
         TicketCount = 40,
         TicketSequence = 41,
-        TransactionIndex = 28,
-        TransferRate = 11,
-        WalletSize = 12,
+        NFTokenTaxon = 42,
+        MintedNFTokens = 43,
+        BurnedNFTokens = 44,
+        HookStateCount = 45,
+        EmitGeneration = 46,
     }
 
     public enum StUInt64FieldCode
     {
-        BaseFee = 5,
-        BookNode = 3,
-        Cookie = 10,
-        DestinationNode = 9,
-        EmitBurden = 13,
-        ExchangeRate = 6,
-        HighNode = 8,
-        HookInstructionCount = 17,
-        HookOn = 16,
-        HookReturnCode = 18,
         IndexNext = 1,
         IndexPrevious = 2,
-        LowNode = 7,
-        NFTokenOfferNode = 12,
+        BookNode = 3,
         OwnerNode = 4,
-        ReferenceCount = 19,
+        BaseFee = 5,
+        ExchangeRate = 6,
+        LowNode = 7,
+        HighNode = 8,
+        DestinationNode = 9,
+        Cookie = 10,
         ServerVersion = 11,
+        NFTokenOfferNode = 12,
+        EmitBurden = 13,
+        HookOn = 16,
+        HookInstructionCount = 17,
+        HookReturnCode = 18,
+        ReferenceCount = 19,
     }
 
     public enum StUInt8FieldCode
     {
         CloseResolution = 1,
-        HookResult = 18,
         Method = 2,
-        TickSize = 16,
         TransactionResult = 3,
+        TickSize = 16,
         UNLModifyDisabling = 17,
+        HookResult = 18,
     }
 
     public enum StUnknownFieldCode
     {
-        Generic = 0,
         Invalid = -1,
+        Generic = 0,
     }
 
     public enum StValidationFieldCode
@@ -392,243 +392,243 @@ namespace Ibasa.Ripple.St
 
     public enum StVector256FieldCode
     {
-        Amendments = 3,
-        Hashes = 2,
         Indexes = 1,
+        Hashes = 2,
+        Amendments = 3,
         NFTokenOffers = 4,
     }
 
     public partial struct StFieldId
     {
         public static readonly StFieldId AccountID_Account = new StFieldId(StTypeCode.AccountID, 1);
-        public static readonly StFieldId AccountID_Authorize = new StFieldId(StTypeCode.AccountID, 5);
+        public static readonly StFieldId AccountID_Owner = new StFieldId(StTypeCode.AccountID, 2);
         public static readonly StFieldId AccountID_Destination = new StFieldId(StTypeCode.AccountID, 3);
+        public static readonly StFieldId AccountID_Issuer = new StFieldId(StTypeCode.AccountID, 4);
+        public static readonly StFieldId AccountID_Authorize = new StFieldId(StTypeCode.AccountID, 5);
+        public static readonly StFieldId AccountID_Unauthorize = new StFieldId(StTypeCode.AccountID, 6);
+        public static readonly StFieldId AccountID_RegularKey = new StFieldId(StTypeCode.AccountID, 8);
+        public static readonly StFieldId AccountID_NFTokenMinter = new StFieldId(StTypeCode.AccountID, 9);
         public static readonly StFieldId AccountID_EmitCallback = new StFieldId(StTypeCode.AccountID, 10);
         public static readonly StFieldId AccountID_HookAccount = new StFieldId(StTypeCode.AccountID, 16);
-        public static readonly StFieldId AccountID_Issuer = new StFieldId(StTypeCode.AccountID, 4);
-        public static readonly StFieldId AccountID_NFTokenMinter = new StFieldId(StTypeCode.AccountID, 9);
-        public static readonly StFieldId AccountID_Owner = new StFieldId(StTypeCode.AccountID, 2);
-        public static readonly StFieldId AccountID_RegularKey = new StFieldId(StTypeCode.AccountID, 8);
-        public static readonly StFieldId AccountID_Unauthorize = new StFieldId(StTypeCode.AccountID, 6);
 
-        public static readonly StFieldId Amount_Amount = new StFieldId(StTypeCode.Amount, 1);
-        public static readonly StFieldId Amount_Balance = new StFieldId(StTypeCode.Amount, 2);
-        public static readonly StFieldId Amount_DeliverMin = new StFieldId(StTypeCode.Amount, 10);
-        public static readonly StFieldId Amount_DeliveredAmount = new StFieldId(StTypeCode.Amount, 18);
-        public static readonly StFieldId Amount_Fee = new StFieldId(StTypeCode.Amount, 8);
-        public static readonly StFieldId Amount_HighLimit = new StFieldId(StTypeCode.Amount, 7);
-        public static readonly StFieldId Amount_LimitAmount = new StFieldId(StTypeCode.Amount, 3);
-        public static readonly StFieldId Amount_LowLimit = new StFieldId(StTypeCode.Amount, 6);
-        public static readonly StFieldId Amount_MinimumOffer = new StFieldId(StTypeCode.Amount, 16);
-        public static readonly StFieldId Amount_NFTokenBrokerFee = new StFieldId(StTypeCode.Amount, 19);
-        public static readonly StFieldId Amount_RippleEscrow = new StFieldId(StTypeCode.Amount, 17);
-        public static readonly StFieldId Amount_SendMax = new StFieldId(StTypeCode.Amount, 9);
-        public static readonly StFieldId Amount_TakerGets = new StFieldId(StTypeCode.Amount, 5);
-        public static readonly StFieldId Amount_TakerPays = new StFieldId(StTypeCode.Amount, 4);
-        public static readonly StFieldId Amount_taker_gets_funded = new StFieldId(StTypeCode.Amount, 258);
-        public static readonly StFieldId Amount_taker_pays_funded = new StFieldId(StTypeCode.Amount, 259);
-
-        public static readonly StFieldId Array_AffectedNodes = new StFieldId(StTypeCode.Array, 8);
-        public static readonly StFieldId Array_ArrayEndMarker = new StFieldId(StTypeCode.Array, 1);
-        public static readonly StFieldId Array_DisabledValidators = new StFieldId(StTypeCode.Array, 17);
-        public static readonly StFieldId Array_HookExecutions = new StFieldId(StTypeCode.Array, 18);
-        public static readonly StFieldId Array_HookGrants = new StFieldId(StTypeCode.Array, 20);
-        public static readonly StFieldId Array_HookParameters = new StFieldId(StTypeCode.Array, 19);
-        public static readonly StFieldId Array_Hooks = new StFieldId(StTypeCode.Array, 11);
-        public static readonly StFieldId Array_Majorities = new StFieldId(StTypeCode.Array, 16);
-        public static readonly StFieldId Array_Memos = new StFieldId(StTypeCode.Array, 9);
-        public static readonly StFieldId Array_NFTokens = new StFieldId(StTypeCode.Array, 10);
-        public static readonly StFieldId Array_Necessary = new StFieldId(StTypeCode.Array, 6);
-        public static readonly StFieldId Array_SignerEntries = new StFieldId(StTypeCode.Array, 4);
-        public static readonly StFieldId Array_Signers = new StFieldId(StTypeCode.Array, 3);
-        public static readonly StFieldId Array_Sufficient = new StFieldId(StTypeCode.Array, 7);
-        public static readonly StFieldId Array_Template = new StFieldId(StTypeCode.Array, 5);
-
-        public static readonly StFieldId Blob_Condition = new StFieldId(StTypeCode.Blob, 17);
-        public static readonly StFieldId Blob_CreateCode = new StFieldId(StTypeCode.Blob, 11);
-        public static readonly StFieldId Blob_Domain = new StFieldId(StTypeCode.Blob, 7);
-        public static readonly StFieldId Blob_ExpireCode = new StFieldId(StTypeCode.Blob, 10);
-        public static readonly StFieldId Blob_Fulfillment = new StFieldId(StTypeCode.Blob, 16);
-        public static readonly StFieldId Blob_FundCode = new StFieldId(StTypeCode.Blob, 8);
-        public static readonly StFieldId Blob_HookParameterName = new StFieldId(StTypeCode.Blob, 24);
-        public static readonly StFieldId Blob_HookParameterValue = new StFieldId(StTypeCode.Blob, 25);
-        public static readonly StFieldId Blob_HookReturnString = new StFieldId(StTypeCode.Blob, 23);
-        public static readonly StFieldId Blob_HookStateData = new StFieldId(StTypeCode.Blob, 22);
-        public static readonly StFieldId Blob_MasterSignature = new StFieldId(StTypeCode.Blob, 18);
-        public static readonly StFieldId Blob_MemoData = new StFieldId(StTypeCode.Blob, 13);
-        public static readonly StFieldId Blob_MemoFormat = new StFieldId(StTypeCode.Blob, 14);
-        public static readonly StFieldId Blob_MemoType = new StFieldId(StTypeCode.Blob, 12);
-        public static readonly StFieldId Blob_MessageKey = new StFieldId(StTypeCode.Blob, 2);
-        public static readonly StFieldId Blob_PublicKey = new StFieldId(StTypeCode.Blob, 1);
-        public static readonly StFieldId Blob_RemoveCode = new StFieldId(StTypeCode.Blob, 9);
-        public static readonly StFieldId Blob_Signature = new StFieldId(StTypeCode.Blob, 6);
-        public static readonly StFieldId Blob_SigningPubKey = new StFieldId(StTypeCode.Blob, 3);
-        public static readonly StFieldId Blob_TxnSignature = new StFieldId(StTypeCode.Blob, 4);
-        public static readonly StFieldId Blob_UNLModifyValidator = new StFieldId(StTypeCode.Blob, 19);
-        public static readonly StFieldId Blob_URI = new StFieldId(StTypeCode.Blob, 5);
-        public static readonly StFieldId Blob_ValidatorToDisable = new StFieldId(StTypeCode.Blob, 20);
-        public static readonly StFieldId Blob_ValidatorToReEnable = new StFieldId(StTypeCode.Blob, 21);
-
-        public static readonly StFieldId Hash128_EmailHash = new StFieldId(StTypeCode.Hash128, 1);
-
-        public static readonly StFieldId Hash160_TakerGetsCurrency = new StFieldId(StTypeCode.Hash160, 3);
-        public static readonly StFieldId Hash160_TakerGetsIssuer = new StFieldId(StTypeCode.Hash160, 4);
-        public static readonly StFieldId Hash160_TakerPaysCurrency = new StFieldId(StTypeCode.Hash160, 1);
-        public static readonly StFieldId Hash160_TakerPaysIssuer = new StFieldId(StTypeCode.Hash160, 2);
-
+        public static readonly StFieldId Hash256_LedgerHash = new StFieldId(StTypeCode.Hash256, 1);
+        public static readonly StFieldId Hash256_ParentHash = new StFieldId(StTypeCode.Hash256, 2);
+        public static readonly StFieldId Hash256_TransactionHash = new StFieldId(StTypeCode.Hash256, 3);
         public static readonly StFieldId Hash256_AccountHash = new StFieldId(StTypeCode.Hash256, 4);
+        public static readonly StFieldId Hash256_PreviousTxnID = new StFieldId(StTypeCode.Hash256, 5);
+        public static readonly StFieldId Hash256_LedgerIndex = new StFieldId(StTypeCode.Hash256, 6);
+        public static readonly StFieldId Hash256_WalletLocator = new StFieldId(StTypeCode.Hash256, 7);
+        public static readonly StFieldId Hash256_RootIndex = new StFieldId(StTypeCode.Hash256, 8);
         public static readonly StFieldId Hash256_AccountTxnID = new StFieldId(StTypeCode.Hash256, 9);
-        public static readonly StFieldId Hash256_Amendment = new StFieldId(StTypeCode.Hash256, 19);
-        public static readonly StFieldId Hash256_BookDirectory = new StFieldId(StTypeCode.Hash256, 16);
-        public static readonly StFieldId Hash256_Channel = new StFieldId(StTypeCode.Hash256, 22);
-        public static readonly StFieldId Hash256_CheckID = new StFieldId(StTypeCode.Hash256, 24);
-        public static readonly StFieldId Hash256_ConsensusHash = new StFieldId(StTypeCode.Hash256, 23);
-        public static readonly StFieldId Hash256_Digest = new StFieldId(StTypeCode.Hash256, 21);
-        public static readonly StFieldId Hash256_EmitHookHash = new StFieldId(StTypeCode.Hash256, 13);
-        public static readonly StFieldId Hash256_EmitNonce = new StFieldId(StTypeCode.Hash256, 12);
+        public static readonly StFieldId Hash256_NFTokenID = new StFieldId(StTypeCode.Hash256, 10);
         public static readonly StFieldId Hash256_EmitParentTxnID = new StFieldId(StTypeCode.Hash256, 11);
+        public static readonly StFieldId Hash256_EmitNonce = new StFieldId(StTypeCode.Hash256, 12);
+        public static readonly StFieldId Hash256_EmitHookHash = new StFieldId(StTypeCode.Hash256, 13);
+        public static readonly StFieldId Hash256_BookDirectory = new StFieldId(StTypeCode.Hash256, 16);
+        public static readonly StFieldId Hash256_InvoiceID = new StFieldId(StTypeCode.Hash256, 17);
+        public static readonly StFieldId Hash256_Nickname = new StFieldId(StTypeCode.Hash256, 18);
+        public static readonly StFieldId Hash256_Amendment = new StFieldId(StTypeCode.Hash256, 19);
+        public static readonly StFieldId Hash256_Digest = new StFieldId(StTypeCode.Hash256, 21);
+        public static readonly StFieldId Hash256_Channel = new StFieldId(StTypeCode.Hash256, 22);
+        public static readonly StFieldId Hash256_ConsensusHash = new StFieldId(StTypeCode.Hash256, 23);
+        public static readonly StFieldId Hash256_CheckID = new StFieldId(StTypeCode.Hash256, 24);
+        public static readonly StFieldId Hash256_ValidatedHash = new StFieldId(StTypeCode.Hash256, 25);
+        public static readonly StFieldId Hash256_PreviousPageMin = new StFieldId(StTypeCode.Hash256, 26);
+        public static readonly StFieldId Hash256_NextPageMin = new StFieldId(StTypeCode.Hash256, 27);
+        public static readonly StFieldId Hash256_NFTokenBuyOffer = new StFieldId(StTypeCode.Hash256, 28);
+        public static readonly StFieldId Hash256_NFTokenSellOffer = new StFieldId(StTypeCode.Hash256, 29);
+        public static readonly StFieldId Hash256_HookStateKey = new StFieldId(StTypeCode.Hash256, 30);
         public static readonly StFieldId Hash256_HookHash = new StFieldId(StTypeCode.Hash256, 31);
         public static readonly StFieldId Hash256_HookNamespace = new StFieldId(StTypeCode.Hash256, 32);
         public static readonly StFieldId Hash256_HookSetTxnID = new StFieldId(StTypeCode.Hash256, 33);
-        public static readonly StFieldId Hash256_HookStateKey = new StFieldId(StTypeCode.Hash256, 30);
-        public static readonly StFieldId Hash256_InvoiceID = new StFieldId(StTypeCode.Hash256, 17);
-        public static readonly StFieldId Hash256_LedgerHash = new StFieldId(StTypeCode.Hash256, 1);
-        public static readonly StFieldId Hash256_LedgerIndex = new StFieldId(StTypeCode.Hash256, 6);
-        public static readonly StFieldId Hash256_NFTokenBuyOffer = new StFieldId(StTypeCode.Hash256, 28);
-        public static readonly StFieldId Hash256_NFTokenID = new StFieldId(StTypeCode.Hash256, 10);
-        public static readonly StFieldId Hash256_NFTokenSellOffer = new StFieldId(StTypeCode.Hash256, 29);
-        public static readonly StFieldId Hash256_NextPageMin = new StFieldId(StTypeCode.Hash256, 27);
-        public static readonly StFieldId Hash256_Nickname = new StFieldId(StTypeCode.Hash256, 18);
-        public static readonly StFieldId Hash256_ParentHash = new StFieldId(StTypeCode.Hash256, 2);
-        public static readonly StFieldId Hash256_PreviousPageMin = new StFieldId(StTypeCode.Hash256, 26);
-        public static readonly StFieldId Hash256_PreviousTxnID = new StFieldId(StTypeCode.Hash256, 5);
-        public static readonly StFieldId Hash256_RootIndex = new StFieldId(StTypeCode.Hash256, 8);
-        public static readonly StFieldId Hash256_TransactionHash = new StFieldId(StTypeCode.Hash256, 3);
-        public static readonly StFieldId Hash256_ValidatedHash = new StFieldId(StTypeCode.Hash256, 25);
-        public static readonly StFieldId Hash256_WalletLocator = new StFieldId(StTypeCode.Hash256, 7);
         public static readonly StFieldId Hash256_hash = new StFieldId(StTypeCode.Hash256, 257);
         public static readonly StFieldId Hash256_index = new StFieldId(StTypeCode.Hash256, 258);
+
+        public static readonly StFieldId Array_ArrayEndMarker = new StFieldId(StTypeCode.Array, 1);
+        public static readonly StFieldId Array_Signers = new StFieldId(StTypeCode.Array, 3);
+        public static readonly StFieldId Array_SignerEntries = new StFieldId(StTypeCode.Array, 4);
+        public static readonly StFieldId Array_Template = new StFieldId(StTypeCode.Array, 5);
+        public static readonly StFieldId Array_Necessary = new StFieldId(StTypeCode.Array, 6);
+        public static readonly StFieldId Array_Sufficient = new StFieldId(StTypeCode.Array, 7);
+        public static readonly StFieldId Array_AffectedNodes = new StFieldId(StTypeCode.Array, 8);
+        public static readonly StFieldId Array_Memos = new StFieldId(StTypeCode.Array, 9);
+        public static readonly StFieldId Array_NFTokens = new StFieldId(StTypeCode.Array, 10);
+        public static readonly StFieldId Array_Hooks = new StFieldId(StTypeCode.Array, 11);
+        public static readonly StFieldId Array_Majorities = new StFieldId(StTypeCode.Array, 16);
+        public static readonly StFieldId Array_DisabledValidators = new StFieldId(StTypeCode.Array, 17);
+        public static readonly StFieldId Array_HookExecutions = new StFieldId(StTypeCode.Array, 18);
+        public static readonly StFieldId Array_HookParameters = new StFieldId(StTypeCode.Array, 19);
+        public static readonly StFieldId Array_HookGrants = new StFieldId(StTypeCode.Array, 20);
+
+        public static readonly StFieldId Vector256_Indexes = new StFieldId(StTypeCode.Vector256, 1);
+        public static readonly StFieldId Vector256_Hashes = new StFieldId(StTypeCode.Vector256, 2);
+        public static readonly StFieldId Vector256_Amendments = new StFieldId(StTypeCode.Vector256, 3);
+        public static readonly StFieldId Vector256_NFTokenOffers = new StFieldId(StTypeCode.Vector256, 4);
+
+        public static readonly StFieldId Amount_Amount = new StFieldId(StTypeCode.Amount, 1);
+        public static readonly StFieldId Amount_Balance = new StFieldId(StTypeCode.Amount, 2);
+        public static readonly StFieldId Amount_LimitAmount = new StFieldId(StTypeCode.Amount, 3);
+        public static readonly StFieldId Amount_TakerPays = new StFieldId(StTypeCode.Amount, 4);
+        public static readonly StFieldId Amount_TakerGets = new StFieldId(StTypeCode.Amount, 5);
+        public static readonly StFieldId Amount_LowLimit = new StFieldId(StTypeCode.Amount, 6);
+        public static readonly StFieldId Amount_HighLimit = new StFieldId(StTypeCode.Amount, 7);
+        public static readonly StFieldId Amount_Fee = new StFieldId(StTypeCode.Amount, 8);
+        public static readonly StFieldId Amount_SendMax = new StFieldId(StTypeCode.Amount, 9);
+        public static readonly StFieldId Amount_DeliverMin = new StFieldId(StTypeCode.Amount, 10);
+        public static readonly StFieldId Amount_MinimumOffer = new StFieldId(StTypeCode.Amount, 16);
+        public static readonly StFieldId Amount_RippleEscrow = new StFieldId(StTypeCode.Amount, 17);
+        public static readonly StFieldId Amount_DeliveredAmount = new StFieldId(StTypeCode.Amount, 18);
+        public static readonly StFieldId Amount_NFTokenBrokerFee = new StFieldId(StTypeCode.Amount, 19);
+        public static readonly StFieldId Amount_taker_gets_funded = new StFieldId(StTypeCode.Amount, 258);
+        public static readonly StFieldId Amount_taker_pays_funded = new StFieldId(StTypeCode.Amount, 259);
+
+        public static readonly StFieldId UInt64_IndexNext = new StFieldId(StTypeCode.UInt64, 1);
+        public static readonly StFieldId UInt64_IndexPrevious = new StFieldId(StTypeCode.UInt64, 2);
+        public static readonly StFieldId UInt64_BookNode = new StFieldId(StTypeCode.UInt64, 3);
+        public static readonly StFieldId UInt64_OwnerNode = new StFieldId(StTypeCode.UInt64, 4);
+        public static readonly StFieldId UInt64_BaseFee = new StFieldId(StTypeCode.UInt64, 5);
+        public static readonly StFieldId UInt64_ExchangeRate = new StFieldId(StTypeCode.UInt64, 6);
+        public static readonly StFieldId UInt64_LowNode = new StFieldId(StTypeCode.UInt64, 7);
+        public static readonly StFieldId UInt64_HighNode = new StFieldId(StTypeCode.UInt64, 8);
+        public static readonly StFieldId UInt64_DestinationNode = new StFieldId(StTypeCode.UInt64, 9);
+        public static readonly StFieldId UInt64_Cookie = new StFieldId(StTypeCode.UInt64, 10);
+        public static readonly StFieldId UInt64_ServerVersion = new StFieldId(StTypeCode.UInt64, 11);
+        public static readonly StFieldId UInt64_NFTokenOfferNode = new StFieldId(StTypeCode.UInt64, 12);
+        public static readonly StFieldId UInt64_EmitBurden = new StFieldId(StTypeCode.UInt64, 13);
+        public static readonly StFieldId UInt64_HookOn = new StFieldId(StTypeCode.UInt64, 16);
+        public static readonly StFieldId UInt64_HookInstructionCount = new StFieldId(StTypeCode.UInt64, 17);
+        public static readonly StFieldId UInt64_HookReturnCode = new StFieldId(StTypeCode.UInt64, 18);
+        public static readonly StFieldId UInt64_ReferenceCount = new StFieldId(StTypeCode.UInt64, 19);
+
+        public static readonly StFieldId UInt32_Flags = new StFieldId(StTypeCode.UInt32, 2);
+        public static readonly StFieldId UInt32_SourceTag = new StFieldId(StTypeCode.UInt32, 3);
+        public static readonly StFieldId UInt32_Sequence = new StFieldId(StTypeCode.UInt32, 4);
+        public static readonly StFieldId UInt32_PreviousTxnLgrSeq = new StFieldId(StTypeCode.UInt32, 5);
+        public static readonly StFieldId UInt32_LedgerSequence = new StFieldId(StTypeCode.UInt32, 6);
+        public static readonly StFieldId UInt32_CloseTime = new StFieldId(StTypeCode.UInt32, 7);
+        public static readonly StFieldId UInt32_ParentCloseTime = new StFieldId(StTypeCode.UInt32, 8);
+        public static readonly StFieldId UInt32_SigningTime = new StFieldId(StTypeCode.UInt32, 9);
+        public static readonly StFieldId UInt32_Expiration = new StFieldId(StTypeCode.UInt32, 10);
+        public static readonly StFieldId UInt32_TransferRate = new StFieldId(StTypeCode.UInt32, 11);
+        public static readonly StFieldId UInt32_WalletSize = new StFieldId(StTypeCode.UInt32, 12);
+        public static readonly StFieldId UInt32_OwnerCount = new StFieldId(StTypeCode.UInt32, 13);
+        public static readonly StFieldId UInt32_DestinationTag = new StFieldId(StTypeCode.UInt32, 14);
+        public static readonly StFieldId UInt32_HighQualityIn = new StFieldId(StTypeCode.UInt32, 16);
+        public static readonly StFieldId UInt32_HighQualityOut = new StFieldId(StTypeCode.UInt32, 17);
+        public static readonly StFieldId UInt32_LowQualityIn = new StFieldId(StTypeCode.UInt32, 18);
+        public static readonly StFieldId UInt32_LowQualityOut = new StFieldId(StTypeCode.UInt32, 19);
+        public static readonly StFieldId UInt32_QualityIn = new StFieldId(StTypeCode.UInt32, 20);
+        public static readonly StFieldId UInt32_QualityOut = new StFieldId(StTypeCode.UInt32, 21);
+        public static readonly StFieldId UInt32_StampEscrow = new StFieldId(StTypeCode.UInt32, 22);
+        public static readonly StFieldId UInt32_BondAmount = new StFieldId(StTypeCode.UInt32, 23);
+        public static readonly StFieldId UInt32_LoadFee = new StFieldId(StTypeCode.UInt32, 24);
+        public static readonly StFieldId UInt32_OfferSequence = new StFieldId(StTypeCode.UInt32, 25);
+        public static readonly StFieldId UInt32_FirstLedgerSequence = new StFieldId(StTypeCode.UInt32, 26);
+        public static readonly StFieldId UInt32_LastLedgerSequence = new StFieldId(StTypeCode.UInt32, 27);
+        public static readonly StFieldId UInt32_TransactionIndex = new StFieldId(StTypeCode.UInt32, 28);
+        public static readonly StFieldId UInt32_OperationLimit = new StFieldId(StTypeCode.UInt32, 29);
+        public static readonly StFieldId UInt32_ReferenceFeeUnits = new StFieldId(StTypeCode.UInt32, 30);
+        public static readonly StFieldId UInt32_ReserveBase = new StFieldId(StTypeCode.UInt32, 31);
+        public static readonly StFieldId UInt32_ReserveIncrement = new StFieldId(StTypeCode.UInt32, 32);
+        public static readonly StFieldId UInt32_SetFlag = new StFieldId(StTypeCode.UInt32, 33);
+        public static readonly StFieldId UInt32_ClearFlag = new StFieldId(StTypeCode.UInt32, 34);
+        public static readonly StFieldId UInt32_SignerQuorum = new StFieldId(StTypeCode.UInt32, 35);
+        public static readonly StFieldId UInt32_CancelAfter = new StFieldId(StTypeCode.UInt32, 36);
+        public static readonly StFieldId UInt32_FinishAfter = new StFieldId(StTypeCode.UInt32, 37);
+        public static readonly StFieldId UInt32_SignerListID = new StFieldId(StTypeCode.UInt32, 38);
+        public static readonly StFieldId UInt32_SettleDelay = new StFieldId(StTypeCode.UInt32, 39);
+        public static readonly StFieldId UInt32_TicketCount = new StFieldId(StTypeCode.UInt32, 40);
+        public static readonly StFieldId UInt32_TicketSequence = new StFieldId(StTypeCode.UInt32, 41);
+        public static readonly StFieldId UInt32_NFTokenTaxon = new StFieldId(StTypeCode.UInt32, 42);
+        public static readonly StFieldId UInt32_MintedNFTokens = new StFieldId(StTypeCode.UInt32, 43);
+        public static readonly StFieldId UInt32_BurnedNFTokens = new StFieldId(StTypeCode.UInt32, 44);
+        public static readonly StFieldId UInt32_HookStateCount = new StFieldId(StTypeCode.UInt32, 45);
+        public static readonly StFieldId UInt32_EmitGeneration = new StFieldId(StTypeCode.UInt32, 46);
+
+        public static readonly StFieldId UInt8_CloseResolution = new StFieldId(StTypeCode.UInt8, 1);
+        public static readonly StFieldId UInt8_Method = new StFieldId(StTypeCode.UInt8, 2);
+        public static readonly StFieldId UInt8_TransactionResult = new StFieldId(StTypeCode.UInt8, 3);
+        public static readonly StFieldId UInt8_TickSize = new StFieldId(StTypeCode.UInt8, 16);
+        public static readonly StFieldId UInt8_UNLModifyDisabling = new StFieldId(StTypeCode.UInt8, 17);
+        public static readonly StFieldId UInt8_HookResult = new StFieldId(StTypeCode.UInt8, 18);
+
+        public static readonly StFieldId Blob_PublicKey = new StFieldId(StTypeCode.Blob, 1);
+        public static readonly StFieldId Blob_MessageKey = new StFieldId(StTypeCode.Blob, 2);
+        public static readonly StFieldId Blob_SigningPubKey = new StFieldId(StTypeCode.Blob, 3);
+        public static readonly StFieldId Blob_TxnSignature = new StFieldId(StTypeCode.Blob, 4);
+        public static readonly StFieldId Blob_URI = new StFieldId(StTypeCode.Blob, 5);
+        public static readonly StFieldId Blob_Signature = new StFieldId(StTypeCode.Blob, 6);
+        public static readonly StFieldId Blob_Domain = new StFieldId(StTypeCode.Blob, 7);
+        public static readonly StFieldId Blob_FundCode = new StFieldId(StTypeCode.Blob, 8);
+        public static readonly StFieldId Blob_RemoveCode = new StFieldId(StTypeCode.Blob, 9);
+        public static readonly StFieldId Blob_ExpireCode = new StFieldId(StTypeCode.Blob, 10);
+        public static readonly StFieldId Blob_CreateCode = new StFieldId(StTypeCode.Blob, 11);
+        public static readonly StFieldId Blob_MemoType = new StFieldId(StTypeCode.Blob, 12);
+        public static readonly StFieldId Blob_MemoData = new StFieldId(StTypeCode.Blob, 13);
+        public static readonly StFieldId Blob_MemoFormat = new StFieldId(StTypeCode.Blob, 14);
+        public static readonly StFieldId Blob_Fulfillment = new StFieldId(StTypeCode.Blob, 16);
+        public static readonly StFieldId Blob_Condition = new StFieldId(StTypeCode.Blob, 17);
+        public static readonly StFieldId Blob_MasterSignature = new StFieldId(StTypeCode.Blob, 18);
+        public static readonly StFieldId Blob_UNLModifyValidator = new StFieldId(StTypeCode.Blob, 19);
+        public static readonly StFieldId Blob_ValidatorToDisable = new StFieldId(StTypeCode.Blob, 20);
+        public static readonly StFieldId Blob_ValidatorToReEnable = new StFieldId(StTypeCode.Blob, 21);
+        public static readonly StFieldId Blob_HookStateData = new StFieldId(StTypeCode.Blob, 22);
+        public static readonly StFieldId Blob_HookReturnString = new StFieldId(StTypeCode.Blob, 23);
+        public static readonly StFieldId Blob_HookParameterName = new StFieldId(StTypeCode.Blob, 24);
+        public static readonly StFieldId Blob_HookParameterValue = new StFieldId(StTypeCode.Blob, 25);
+
+        public static readonly StFieldId Object_ObjectEndMarker = new StFieldId(StTypeCode.Object, 1);
+        public static readonly StFieldId Object_TransactionMetaData = new StFieldId(StTypeCode.Object, 2);
+        public static readonly StFieldId Object_CreatedNode = new StFieldId(StTypeCode.Object, 3);
+        public static readonly StFieldId Object_DeletedNode = new StFieldId(StTypeCode.Object, 4);
+        public static readonly StFieldId Object_ModifiedNode = new StFieldId(StTypeCode.Object, 5);
+        public static readonly StFieldId Object_PreviousFields = new StFieldId(StTypeCode.Object, 6);
+        public static readonly StFieldId Object_FinalFields = new StFieldId(StTypeCode.Object, 7);
+        public static readonly StFieldId Object_NewFields = new StFieldId(StTypeCode.Object, 8);
+        public static readonly StFieldId Object_TemplateEntry = new StFieldId(StTypeCode.Object, 9);
+        public static readonly StFieldId Object_Memo = new StFieldId(StTypeCode.Object, 10);
+        public static readonly StFieldId Object_SignerEntry = new StFieldId(StTypeCode.Object, 11);
+        public static readonly StFieldId Object_NFToken = new StFieldId(StTypeCode.Object, 12);
+        public static readonly StFieldId Object_EmitDetails = new StFieldId(StTypeCode.Object, 13);
+        public static readonly StFieldId Object_Hook = new StFieldId(StTypeCode.Object, 14);
+        public static readonly StFieldId Object_Signer = new StFieldId(StTypeCode.Object, 16);
+        public static readonly StFieldId Object_Majority = new StFieldId(StTypeCode.Object, 18);
+        public static readonly StFieldId Object_DisabledValidator = new StFieldId(StTypeCode.Object, 19);
+        public static readonly StFieldId Object_EmittedTxn = new StFieldId(StTypeCode.Object, 20);
+        public static readonly StFieldId Object_HookExecution = new StFieldId(StTypeCode.Object, 21);
+        public static readonly StFieldId Object_HookDefinition = new StFieldId(StTypeCode.Object, 22);
+        public static readonly StFieldId Object_HookParameter = new StFieldId(StTypeCode.Object, 23);
+        public static readonly StFieldId Object_HookGrant = new StFieldId(StTypeCode.Object, 24);
+
+        public static readonly StFieldId Hash128_EmailHash = new StFieldId(StTypeCode.Hash128, 1);
+
+        public static readonly StFieldId Unknown_Invalid = new StFieldId(StTypeCode.Unknown, 4294967295);
+        public static readonly StFieldId Unknown_Generic = new StFieldId(StTypeCode.Unknown, 0);
+
+        public static readonly StFieldId UInt16_LedgerEntryType = new StFieldId(StTypeCode.UInt16, 1);
+        public static readonly StFieldId UInt16_TransactionType = new StFieldId(StTypeCode.UInt16, 2);
+        public static readonly StFieldId UInt16_SignerWeight = new StFieldId(StTypeCode.UInt16, 3);
+        public static readonly StFieldId UInt16_TransferFee = new StFieldId(StTypeCode.UInt16, 4);
+        public static readonly StFieldId UInt16_Version = new StFieldId(StTypeCode.UInt16, 16);
+        public static readonly StFieldId UInt16_HookStateChangeCount = new StFieldId(StTypeCode.UInt16, 17);
+        public static readonly StFieldId UInt16_HookEmitCount = new StFieldId(StTypeCode.UInt16, 18);
+        public static readonly StFieldId UInt16_HookExecutionIndex = new StFieldId(StTypeCode.UInt16, 19);
+        public static readonly StFieldId UInt16_HookApiVersion = new StFieldId(StTypeCode.UInt16, 20);
 
         public static readonly StFieldId LedgerEntry_LedgerEntry = new StFieldId(StTypeCode.LedgerEntry, 1);
 
         public static readonly StFieldId Metadata_Metadata = new StFieldId(StTypeCode.Metadata, 1);
 
-        public static readonly StFieldId Object_CreatedNode = new StFieldId(StTypeCode.Object, 3);
-        public static readonly StFieldId Object_DeletedNode = new StFieldId(StTypeCode.Object, 4);
-        public static readonly StFieldId Object_DisabledValidator = new StFieldId(StTypeCode.Object, 19);
-        public static readonly StFieldId Object_EmitDetails = new StFieldId(StTypeCode.Object, 13);
-        public static readonly StFieldId Object_EmittedTxn = new StFieldId(StTypeCode.Object, 20);
-        public static readonly StFieldId Object_FinalFields = new StFieldId(StTypeCode.Object, 7);
-        public static readonly StFieldId Object_Hook = new StFieldId(StTypeCode.Object, 14);
-        public static readonly StFieldId Object_HookDefinition = new StFieldId(StTypeCode.Object, 22);
-        public static readonly StFieldId Object_HookExecution = new StFieldId(StTypeCode.Object, 21);
-        public static readonly StFieldId Object_HookGrant = new StFieldId(StTypeCode.Object, 24);
-        public static readonly StFieldId Object_HookParameter = new StFieldId(StTypeCode.Object, 23);
-        public static readonly StFieldId Object_Majority = new StFieldId(StTypeCode.Object, 18);
-        public static readonly StFieldId Object_Memo = new StFieldId(StTypeCode.Object, 10);
-        public static readonly StFieldId Object_ModifiedNode = new StFieldId(StTypeCode.Object, 5);
-        public static readonly StFieldId Object_NFToken = new StFieldId(StTypeCode.Object, 12);
-        public static readonly StFieldId Object_NewFields = new StFieldId(StTypeCode.Object, 8);
-        public static readonly StFieldId Object_ObjectEndMarker = new StFieldId(StTypeCode.Object, 1);
-        public static readonly StFieldId Object_PreviousFields = new StFieldId(StTypeCode.Object, 6);
-        public static readonly StFieldId Object_Signer = new StFieldId(StTypeCode.Object, 16);
-        public static readonly StFieldId Object_SignerEntry = new StFieldId(StTypeCode.Object, 11);
-        public static readonly StFieldId Object_TemplateEntry = new StFieldId(StTypeCode.Object, 9);
-        public static readonly StFieldId Object_TransactionMetaData = new StFieldId(StTypeCode.Object, 2);
-
         public static readonly StFieldId PathSet_Paths = new StFieldId(StTypeCode.PathSet, 1);
+
+        public static readonly StFieldId Hash160_TakerPaysCurrency = new StFieldId(StTypeCode.Hash160, 1);
+        public static readonly StFieldId Hash160_TakerPaysIssuer = new StFieldId(StTypeCode.Hash160, 2);
+        public static readonly StFieldId Hash160_TakerGetsCurrency = new StFieldId(StTypeCode.Hash160, 3);
+        public static readonly StFieldId Hash160_TakerGetsIssuer = new StFieldId(StTypeCode.Hash160, 4);
 
         public static readonly StFieldId Transaction_Transaction = new StFieldId(StTypeCode.Transaction, 1);
 
-        public static readonly StFieldId UInt16_HookApiVersion = new StFieldId(StTypeCode.UInt16, 20);
-        public static readonly StFieldId UInt16_HookEmitCount = new StFieldId(StTypeCode.UInt16, 18);
-        public static readonly StFieldId UInt16_HookExecutionIndex = new StFieldId(StTypeCode.UInt16, 19);
-        public static readonly StFieldId UInt16_HookStateChangeCount = new StFieldId(StTypeCode.UInt16, 17);
-        public static readonly StFieldId UInt16_LedgerEntryType = new StFieldId(StTypeCode.UInt16, 1);
-        public static readonly StFieldId UInt16_SignerWeight = new StFieldId(StTypeCode.UInt16, 3);
-        public static readonly StFieldId UInt16_TransactionType = new StFieldId(StTypeCode.UInt16, 2);
-        public static readonly StFieldId UInt16_TransferFee = new StFieldId(StTypeCode.UInt16, 4);
-        public static readonly StFieldId UInt16_Version = new StFieldId(StTypeCode.UInt16, 16);
-
-        public static readonly StFieldId UInt32_BondAmount = new StFieldId(StTypeCode.UInt32, 23);
-        public static readonly StFieldId UInt32_BurnedNFTokens = new StFieldId(StTypeCode.UInt32, 44);
-        public static readonly StFieldId UInt32_CancelAfter = new StFieldId(StTypeCode.UInt32, 36);
-        public static readonly StFieldId UInt32_ClearFlag = new StFieldId(StTypeCode.UInt32, 34);
-        public static readonly StFieldId UInt32_CloseTime = new StFieldId(StTypeCode.UInt32, 7);
-        public static readonly StFieldId UInt32_DestinationTag = new StFieldId(StTypeCode.UInt32, 14);
-        public static readonly StFieldId UInt32_EmitGeneration = new StFieldId(StTypeCode.UInt32, 46);
-        public static readonly StFieldId UInt32_Expiration = new StFieldId(StTypeCode.UInt32, 10);
-        public static readonly StFieldId UInt32_FinishAfter = new StFieldId(StTypeCode.UInt32, 37);
-        public static readonly StFieldId UInt32_FirstLedgerSequence = new StFieldId(StTypeCode.UInt32, 26);
-        public static readonly StFieldId UInt32_Flags = new StFieldId(StTypeCode.UInt32, 2);
-        public static readonly StFieldId UInt32_HighQualityIn = new StFieldId(StTypeCode.UInt32, 16);
-        public static readonly StFieldId UInt32_HighQualityOut = new StFieldId(StTypeCode.UInt32, 17);
-        public static readonly StFieldId UInt32_HookStateCount = new StFieldId(StTypeCode.UInt32, 45);
-        public static readonly StFieldId UInt32_LastLedgerSequence = new StFieldId(StTypeCode.UInt32, 27);
-        public static readonly StFieldId UInt32_LedgerSequence = new StFieldId(StTypeCode.UInt32, 6);
-        public static readonly StFieldId UInt32_LoadFee = new StFieldId(StTypeCode.UInt32, 24);
-        public static readonly StFieldId UInt32_LowQualityIn = new StFieldId(StTypeCode.UInt32, 18);
-        public static readonly StFieldId UInt32_LowQualityOut = new StFieldId(StTypeCode.UInt32, 19);
-        public static readonly StFieldId UInt32_MintedNFTokens = new StFieldId(StTypeCode.UInt32, 43);
-        public static readonly StFieldId UInt32_NFTokenTaxon = new StFieldId(StTypeCode.UInt32, 42);
-        public static readonly StFieldId UInt32_OfferSequence = new StFieldId(StTypeCode.UInt32, 25);
-        public static readonly StFieldId UInt32_OperationLimit = new StFieldId(StTypeCode.UInt32, 29);
-        public static readonly StFieldId UInt32_OwnerCount = new StFieldId(StTypeCode.UInt32, 13);
-        public static readonly StFieldId UInt32_ParentCloseTime = new StFieldId(StTypeCode.UInt32, 8);
-        public static readonly StFieldId UInt32_PreviousTxnLgrSeq = new StFieldId(StTypeCode.UInt32, 5);
-        public static readonly StFieldId UInt32_QualityIn = new StFieldId(StTypeCode.UInt32, 20);
-        public static readonly StFieldId UInt32_QualityOut = new StFieldId(StTypeCode.UInt32, 21);
-        public static readonly StFieldId UInt32_ReferenceFeeUnits = new StFieldId(StTypeCode.UInt32, 30);
-        public static readonly StFieldId UInt32_ReserveBase = new StFieldId(StTypeCode.UInt32, 31);
-        public static readonly StFieldId UInt32_ReserveIncrement = new StFieldId(StTypeCode.UInt32, 32);
-        public static readonly StFieldId UInt32_Sequence = new StFieldId(StTypeCode.UInt32, 4);
-        public static readonly StFieldId UInt32_SetFlag = new StFieldId(StTypeCode.UInt32, 33);
-        public static readonly StFieldId UInt32_SettleDelay = new StFieldId(StTypeCode.UInt32, 39);
-        public static readonly StFieldId UInt32_SignerListID = new StFieldId(StTypeCode.UInt32, 38);
-        public static readonly StFieldId UInt32_SignerQuorum = new StFieldId(StTypeCode.UInt32, 35);
-        public static readonly StFieldId UInt32_SigningTime = new StFieldId(StTypeCode.UInt32, 9);
-        public static readonly StFieldId UInt32_SourceTag = new StFieldId(StTypeCode.UInt32, 3);
-        public static readonly StFieldId UInt32_StampEscrow = new StFieldId(StTypeCode.UInt32, 22);
-        public static readonly StFieldId UInt32_TicketCount = new StFieldId(StTypeCode.UInt32, 40);
-        public static readonly StFieldId UInt32_TicketSequence = new StFieldId(StTypeCode.UInt32, 41);
-        public static readonly StFieldId UInt32_TransactionIndex = new StFieldId(StTypeCode.UInt32, 28);
-        public static readonly StFieldId UInt32_TransferRate = new StFieldId(StTypeCode.UInt32, 11);
-        public static readonly StFieldId UInt32_WalletSize = new StFieldId(StTypeCode.UInt32, 12);
-
-        public static readonly StFieldId UInt64_BaseFee = new StFieldId(StTypeCode.UInt64, 5);
-        public static readonly StFieldId UInt64_BookNode = new StFieldId(StTypeCode.UInt64, 3);
-        public static readonly StFieldId UInt64_Cookie = new StFieldId(StTypeCode.UInt64, 10);
-        public static readonly StFieldId UInt64_DestinationNode = new StFieldId(StTypeCode.UInt64, 9);
-        public static readonly StFieldId UInt64_EmitBurden = new StFieldId(StTypeCode.UInt64, 13);
-        public static readonly StFieldId UInt64_ExchangeRate = new StFieldId(StTypeCode.UInt64, 6);
-        public static readonly StFieldId UInt64_HighNode = new StFieldId(StTypeCode.UInt64, 8);
-        public static readonly StFieldId UInt64_HookInstructionCount = new StFieldId(StTypeCode.UInt64, 17);
-        public static readonly StFieldId UInt64_HookOn = new StFieldId(StTypeCode.UInt64, 16);
-        public static readonly StFieldId UInt64_HookReturnCode = new StFieldId(StTypeCode.UInt64, 18);
-        public static readonly StFieldId UInt64_IndexNext = new StFieldId(StTypeCode.UInt64, 1);
-        public static readonly StFieldId UInt64_IndexPrevious = new StFieldId(StTypeCode.UInt64, 2);
-        public static readonly StFieldId UInt64_LowNode = new StFieldId(StTypeCode.UInt64, 7);
-        public static readonly StFieldId UInt64_NFTokenOfferNode = new StFieldId(StTypeCode.UInt64, 12);
-        public static readonly StFieldId UInt64_OwnerNode = new StFieldId(StTypeCode.UInt64, 4);
-        public static readonly StFieldId UInt64_ReferenceCount = new StFieldId(StTypeCode.UInt64, 19);
-        public static readonly StFieldId UInt64_ServerVersion = new StFieldId(StTypeCode.UInt64, 11);
-
-        public static readonly StFieldId UInt8_CloseResolution = new StFieldId(StTypeCode.UInt8, 1);
-        public static readonly StFieldId UInt8_HookResult = new StFieldId(StTypeCode.UInt8, 18);
-        public static readonly StFieldId UInt8_Method = new StFieldId(StTypeCode.UInt8, 2);
-        public static readonly StFieldId UInt8_TickSize = new StFieldId(StTypeCode.UInt8, 16);
-        public static readonly StFieldId UInt8_TransactionResult = new StFieldId(StTypeCode.UInt8, 3);
-        public static readonly StFieldId UInt8_UNLModifyDisabling = new StFieldId(StTypeCode.UInt8, 17);
-
-        public static readonly StFieldId Unknown_Generic = new StFieldId(StTypeCode.Unknown, 0);
-        public static readonly StFieldId Unknown_Invalid = new StFieldId(StTypeCode.Unknown, 4294967295);
-
         public static readonly StFieldId Validation_Validation = new StFieldId(StTypeCode.Validation, 1);
-
-        public static readonly StFieldId Vector256_Amendments = new StFieldId(StTypeCode.Vector256, 3);
-        public static readonly StFieldId Vector256_Hashes = new StFieldId(StTypeCode.Vector256, 2);
-        public static readonly StFieldId Vector256_Indexes = new StFieldId(StTypeCode.Vector256, 1);
-        public static readonly StFieldId Vector256_NFTokenOffers = new StFieldId(StTypeCode.Vector256, 4);
 
     }
 
@@ -2052,6 +2052,12 @@ namespace Ibasa.Ripple
         /// </summary>
         public uint Flags { get; private set; }
 
+        /// <summary>
+        /// (Optional) Do not use. (The "recent hashes" object of the production XRP Ledger has the value 2 in this field as a result of a previous rippled software. That value gets carried forward as the "recent hashes" object is updated. New "previous history" objects do not have this field, nor do "recent hashes" objects in parallel networks started with more recent versions of rippled.)
+        /// </summary>
+        [Obsolete]
+        public uint? FirstLedgerSequence { get; private set; }
+
         internal LedgerHashesLedgerEntry(JsonElement json)
         {
             if (json.GetProperty("LedgerEntryType").GetString() != "LedgerHashes")
@@ -2069,6 +2075,10 @@ namespace Ibasa.Ripple
             }
             Hashes = Array.AsReadOnly(HashesArray);
             Flags = json.GetProperty("Flags").GetUInt32();
+            if (json.TryGetProperty("FirstLedgerSequence", out element))
+            {
+                FirstLedgerSequence = element.GetUInt32();
+            }
         }
 
         internal LedgerHashesLedgerEntry(ref StReader reader)
@@ -2082,6 +2092,14 @@ namespace Ibasa.Ripple
             if (!reader.TryReadFieldId(out fieldId))
             {
                 throw new Exception("Could not read LedgerHashesLedgerEntry, end of st data reached but non-optional fields still not set");
+            }
+            if (fieldId == StFieldId.UInt32_FirstLedgerSequence)
+            {
+                FirstLedgerSequence = reader.ReadUInt32();
+                if (!reader.TryReadFieldId(out fieldId))
+                {
+                    throw new Exception("Could not read LedgerHashesLedgerEntry, end of st data reached but non-optional fields still not set");
+                }
             }
             if (fieldId != StFieldId.UInt32_LastLedgerSequence)
             {

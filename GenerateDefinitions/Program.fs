@@ -58,9 +58,13 @@ let emitLedgerEntry (writer : TextWriter) (document : JsonDocument) =
     writer.WriteLine("    /// </summary>")
     writer.WriteLine("    public enum StLedgerEntryType")
     writer.WriteLine("    {")
-    for entry in types.EnumerateObject() do
-        let value = entry.Value.GetInt32()
-        writer.WriteLine("        {0} = {1},", entry.Name, value)
+    seq {
+        for entry in types.EnumerateObject() do
+            let value = entry.Value.GetInt32()
+            yield entry.Name, value
+    }
+    |> Seq.sortBy (fun (name, value) -> value)
+    |> Seq.iter (fun (name, value) -> writer.WriteLine("        {0} = {1},", name, value))
     writer.WriteLine("    }")
     writer.WriteLine()
     
@@ -74,9 +78,13 @@ let emitTransactionType (writer : TextWriter) (document : JsonDocument) =
     writer.WriteLine("    /// </summary>")
     writer.WriteLine("    public enum StTransactionType : ushort")
     writer.WriteLine("    {")
-    for entry in types.EnumerateObject() do
-        let value = entry.Value.GetInt32()
-        writer.WriteLine("        {0} = {1},", entry.Name, uint16 value)
+    seq {
+        for entry in types.EnumerateObject() do
+            let value = entry.Value.GetInt32()
+            yield entry.Name, uint16 value
+    }
+    |> Seq.sortBy (fun (name, value) -> value)
+    |> Seq.iter (fun (name, value) -> writer.WriteLine("        {0} = {1},", name, value))
     writer.WriteLine("    }")
     writer.WriteLine()
 
@@ -118,7 +126,7 @@ let emitFields (writer : TextWriter) (document : JsonDocument) =
         writer.WriteLine("    public enum St{0}FieldCode", typeFields.Key)
         writer.WriteLine("    {")
 
-        for field in typeFields.Value do 
+        for field in typeFields.Value |> Seq.sortBy (fun f -> f.Value) do 
             writer.WriteLine("        {0} = {1},", field.Key, field.Value)
         writer.WriteLine("    }")
         writer.WriteLine()
@@ -126,8 +134,8 @@ let emitFields (writer : TextWriter) (document : JsonDocument) =
     // For each field emit the FieldId
     writer.WriteLine("    public partial struct StFieldId")
     writer.WriteLine("    {")
-    for typeFields in fields do
-        for field in typeFields.Value do 
+    for typeFields in fields |> Seq.sortBy (fun f -> f.Value) do
+        for field in typeFields.Value |> Seq.sortBy (fun f -> f.Value) do 
             writer.WriteLine("        public static readonly StFieldId {0}_{1} = new StFieldId(StTypeCode.{0}, {2});", typeFields.Key, field.Key, uint field.Value)
         writer.WriteLine("")
     writer.WriteLine("    }")
@@ -580,6 +588,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 field "LastLedgerSequence" "The Ledger Index of the last entry in this object's Hashes array."
                 field "Hashes" "An array of up to 256 ledger hashes. The contents depend on which sub-type of LedgerHashes object this is."
                 field "Flags" "A bit-map of boolean flags for this object. No flags are defined for this type."            
+                fieldDeprecated "FirstLedgerSequence" "Do not use. (The \"recent hashes\" object of the production XRP Ledger has the value 2 in this field as a result of a previous rippled software. That value gets carried forward as the \"recent hashes\" object is updated. New \"previous history\" objects do not have this field, nor do \"recent hashes\" objects in parallel networks started with more recent versions of rippled.)"
             ]
         }
         {
