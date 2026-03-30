@@ -58,7 +58,7 @@ namespace Ibasa.Ripple
         {
             if (Issuer.HasValue)
             {
-                return string.Format("{1}({2})", CurrencyCode, Issuer.Value);
+                return string.Format("{0}({1})", CurrencyCode, Issuer.Value);
             }
             else
             {

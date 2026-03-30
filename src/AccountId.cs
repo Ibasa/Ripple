@@ -1,11 +1,14 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.Security.AccessControl;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Ibasa.Ripple
 {
-    public sealed class AccountIdConverter : JsonConverter<AccountId>
+    internal sealed class AccountIdJsonConverter : JsonConverter<AccountId>
     {
         public override AccountId Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -20,7 +23,39 @@ namespace Ibasa.Ripple
         }
     }
 
-    [JsonConverter(typeof(AccountIdConverter))]
+    internal sealed class AccountIdTypeConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string);
+        }
+
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            return destinationType == typeof(string);
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value is string str)
+            {
+                return new AccountId(str);
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
+
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        {
+            if (destinationType == typeof(string))
+            {
+                return value.ToString();
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+    }
+
+    [JsonConverter(typeof(AccountIdJsonConverter))]
+    [TypeConverter(typeof(AccountIdTypeConverter))]
     [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Size = 20)]
     public struct AccountId : IEquatable<AccountId>, IComparable<AccountId>
     {
