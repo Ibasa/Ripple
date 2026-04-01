@@ -480,7 +480,7 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "BurnedNFTokens" "How many total of this account's issued non-fungible tokens have been burned. This number is always equal or less than MintedNFTokens."
                 fieldOpt "MintedNFTokens" "How many total non-fungible tokens have been minted by and on behalf of this account."
                 fieldOpt "NFTokenMinter" "Another account that is authorized to mint non-fungible tokens on behalf of this account."
-                fieldOpt "TicketCount" "How many significant digits to use for exchange rates of Offers involving currencies issued by this address. Valid values are 3 to 15, inclusive. (Added by the TickSize amendment.)"
+                fieldOpt "TicketCount" "How many Tickets this account owns in the ledger."
                 fieldDeprecated "WalletLocator" "Do not use."
                 fieldDeprecated "WalletSize" "Do not use."
             ]
@@ -540,11 +540,13 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "IndexPrevious" "If this Directory consists of multiple pages, this ID links to the previous object in the chain, wrapping around at the beginning."
                 fieldOpt "Owner" "(Owner Directories only) The address of the account that owns the objects in this directory."
                 fieldOpt "ExchangeRate" "(Offer Directories only) DEPRECATED. Do not use."
+                previousTxnID
+                previousTxnLgrSeq
                 fieldOpt "TakerPaysCurrency" "(Offer Directories only) The currency code of the TakerPays amount from the offers in this directory." |> withOverride "Hash160_CurrencyCode"
                 fieldOpt "TakerPaysIssuer" "(Offer Directories only) The issuer of the TakerPays amount from the offers in this directory." |> withOverride "Hash160_AccountId"
                 fieldOpt "TakerGetsCurrency" "(Offer Directories only) The currency code of the TakerGets amount from the offers in this directory." |> withOverride "Hash160_CurrencyCode"
                 fieldOpt "TakerGetsIssuer" "(Offer Directories only) The issuer of the TakerGets amount from the offers in this directory." |> withOverride "Hash160_AccountId"
-                fieldOpt "NFTokenID" "TOOD Unknown documentation."
+                fieldOpt "NFTokenID" "(NFToken directories only) The NFTokenID associated with this directory."
 
             ]
         }
@@ -717,6 +719,90 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 previousTxnID
                 previousTxnLgrSeq
             ]
+        }
+        {
+            IsTransaction = false
+            Name = "DID"
+            Doc = "The DID object type stores a decentralized identifier document for an account."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Bridge"
+            Doc = "The Bridge object type stores the definition of a cross-chain bridge."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "XChainOwnedClaimID"
+            Doc = "The XChainOwnedClaimID object type tracks a cross-chain claim ID owned by an account."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "XChainOwnedCreateAccountClaimID"
+            Doc = "The XChainOwnedCreateAccountClaimID object type tracks a cross-chain account-creation claim ID owned by an account."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "AMM"
+            Doc = "The AMM object type stores an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "MPTokenIssuance"
+            Doc = "The MPTokenIssuance object type stores the definition of a multi-purpose token issuance."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "MPToken"
+            Doc = "The MPToken object type stores a holder's balance and authorization state for a multi-purpose token."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Oracle"
+            Doc = "The Oracle object type stores an oracle's published data."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Credential"
+            Doc = "The Credential object type stores a credential issued to an account."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "PermissionedDomain"
+            Doc = "The PermissionedDomain object type stores a permissioned domain and its membership settings."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Delegate"
+            Doc = "The Delegate object type stores delegated transaction authority."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Vault"
+            Doc = "The Vault object type stores the state of a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "LoanBroker"
+            Doc = "The LoanBroker object type stores a loan broker configuration."
+            Fields = []
+        }
+        {
+            IsTransaction = false
+            Name = "Loan"
+            Doc = "The Loan object type stores the state of a loan."
+            Fields = []
         }
         {
             IsTransaction = true
@@ -922,6 +1008,342 @@ let emitLedger (writer : TextWriter) (document : JsonDocument) =
                 fieldOpt "QualityOut" "Value outgoing balances on this trust line at the ratio of this number per 1,000,000,000 units. A value of 0 is shorthand for treating balances at face value."
 
             ]
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenMint"
+            Doc = "Mint a non-fungible token."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenBurn"
+            Doc = "Burn a non-fungible token."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenCreateOffer"
+            Doc = "Create an offer to buy, sell, or transfer a non-fungible token."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenCancelOffer"
+            Doc = "Cancel one or more non-fungible token offers."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenAcceptOffer"
+            Doc = "Accept a non-fungible token buy or sell offer."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "Clawback"
+            Doc = "Claw back issued tokens from a holder."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMClawback"
+            Doc = "Claw back assets associated with an automated market maker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMCreate"
+            Doc = "Create an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMDeposit"
+            Doc = "Deposit assets into an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMWithdraw"
+            Doc = "Withdraw assets from an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMVote"
+            Doc = "Vote on an automated market maker pool's trading fee."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMBid"
+            Doc = "Bid for the auction slot of an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "AMMDelete"
+            Doc = "Delete an automated market maker pool."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainCreateClaimID"
+            Doc = "Create a cross-chain claim ID."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainCommit"
+            Doc = "Commit funds to a cross-chain bridge transfer."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainClaim"
+            Doc = "Claim funds from a cross-chain bridge transfer."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainAccountCreateCommit"
+            Doc = "Commit funds for cross-chain account creation."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainAddClaimAttestation"
+            Doc = "Add a witness attestation for a cross-chain claim."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainAddAccountCreateAttestation"
+            Doc = "Add a witness attestation for cross-chain account creation."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainModifyBridge"
+            Doc = "Modify the signer list or quorum of a cross-chain bridge."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "XChainCreateBridge"
+            Doc = "Create a cross-chain bridge."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "DIDSet"
+            Doc = "Create or update a decentralized identifier document."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "DIDDelete"
+            Doc = "Delete a decentralized identifier document."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "OracleSet"
+            Doc = "Create or update an oracle."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "OracleDelete"
+            Doc = "Delete an oracle."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LedgerStateFix"
+            Doc = "Apply a ledger-state fix transaction."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "MPTokenIssuanceCreate"
+            Doc = "Create a multi-purpose token issuance."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "MPTokenIssuanceDestroy"
+            Doc = "Destroy a multi-purpose token issuance."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "MPTokenIssuanceSet"
+            Doc = "Update a multi-purpose token issuance."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "MPTokenAuthorize"
+            Doc = "Authorize or unauthorize an account for a multi-purpose token."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "CredentialCreate"
+            Doc = "Create a credential."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "CredentialAccept"
+            Doc = "Accept a credential."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "CredentialDelete"
+            Doc = "Delete a credential."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "NFTokenModify"
+            Doc = "Modify a non-fungible token."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "PermissionedDomainSet"
+            Doc = "Create or update a permissioned domain."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "PermissionedDomainDelete"
+            Doc = "Delete a permissioned domain."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "DelegateSet"
+            Doc = "Create, update, or delete delegated transaction authority."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultCreate"
+            Doc = "Create a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultSet"
+            Doc = "Update a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultDelete"
+            Doc = "Delete a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultDeposit"
+            Doc = "Deposit funds into a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultWithdraw"
+            Doc = "Withdraw funds from a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "VaultClawback"
+            Doc = "Claw back funds from a vault."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "Batch"
+            Doc = "Submit a batch of inner transactions."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanBrokerSet"
+            Doc = "Create or update a loan broker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanBrokerDelete"
+            Doc = "Delete a loan broker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanBrokerCoverDeposit"
+            Doc = "Deposit cover into a loan broker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanBrokerCoverWithdraw"
+            Doc = "Withdraw cover from a loan broker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanBrokerCoverClawback"
+            Doc = "Claw back cover from a loan broker."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanSet"
+            Doc = "Create or update a loan."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanDelete"
+            Doc = "Delete a loan."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanManage"
+            Doc = "Manage the state of a loan."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "LoanPay"
+            Doc = "Make a payment on a loan."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "EnableAmendment"
+            Doc = "Enable an amendment."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "SetFee"
+            Doc = "Update fee settings by validator vote."
+            Fields = []
+        }
+        {
+            IsTransaction = true
+            Name = "UNLModify"
+            Doc = "Modify the negative UNL."
+            Fields = []
         }
     ]
 
